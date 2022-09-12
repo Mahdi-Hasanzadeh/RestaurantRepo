@@ -13,3 +13,16 @@
 .comment {
   text-align: center;
 }
+.cardLink {
+  color: black;
+  font-size: 32px;
+}
+.cardLink:hover {
+  color: #000000;
+  font-size: 48px;
+}
+.title {
+  font-weight: bolder;
+  font-size: 18px;
+  font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+}

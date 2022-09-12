@@ -11,7 +11,9 @@ class DishDetail extends Component {
             alt={this.props.selectedDish.name}
           />
           <CardBody>
-            <CardTitle>{this.props.selectedDish.name}</CardTitle>
+            <CardTitle className="title">
+              {this.props.selectedDish.name}
+            </CardTitle>
             <CardText>{this.props.selectedDish.description}</CardText>
           </CardBody>
         </Card>

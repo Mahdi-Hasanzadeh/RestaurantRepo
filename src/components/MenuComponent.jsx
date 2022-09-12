@@ -18,28 +18,32 @@ class Menu extends Component {
   }
 
   handleClck(value) {
+    document.getElementById("selectedItem");
     this.setState({ selectedFood: value });
   }
   render() {
     var menu = this.props.data.map(item => {
       return (
         <div key={item.id} className="col-12 col-md-5 col">
-          <Card
-            onClick={() => {
-              this.handleClck(item);
-            }}
-          >
-            <CardImg width="100%" src={item.image} alt={item.name} />
-            <CardImgOverlay>
-              <CardTitle>{item.name}</CardTitle>
-            </CardImgOverlay>
-          </Card>
+          <a href="#selectedItem" className="cardLink">
+            <Card
+              onClick={() => {
+                this.handleClck(item);
+              }}
+            >
+              <CardImg width="100%" src={item.image} alt={item.name} />
+              <CardImgOverlay>
+                <CardTitle>{item.name}</CardTitle>
+              </CardImgOverlay>
+            </Card>
+          </a>
         </div>
       );
     });
     return (
       <div className="container">
         <div className="row">{menu}</div>
+        <p id="selectedItem" />
         <DishDetail selectedDish={this.state.selectedFood} />
       </div>
     );
