@@ -28,6 +28,7 @@ class DishDetail extends Component {
           <Card>
             <CardTitle>
               <h4>Comments</h4>
+              <hr />
             </CardTitle>
             {value.map(comment => {
               return (

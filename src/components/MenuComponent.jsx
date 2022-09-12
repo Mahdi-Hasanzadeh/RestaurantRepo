@@ -25,7 +25,11 @@ class Menu extends Component {
     var menu = this.props.data.map(item => {
       return (
         <div key={item.id} className="col-12 col-md-5 col">
-          <a href="#selectedItem" className="cardLink">
+          <a
+            href="#selectedItem"
+            title="Click to see the description"
+            className="cardLink"
+          >
             <Card
               onClick={() => {
                 this.handleClck(item);
