@@ -1,4 +1,4 @@
-.navContainer {
+/* .navContainer {
   width: 90%;
   margin: 0 auto;
   background-color: orange;
@@ -8,8 +8,66 @@
 }
 .nav {
   width: 85%;
+} */
+* {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
-
+body {
+  padding-bottom: 330px;
+}
+.header {
+  background: #18adad;
+  border-radius: 10px;
+  margin-top: 5px;
+}
+.restaurantTitle {
+  text-shadow: 1px 1px red, 2px 2px #ffff00, 3px 3px green, 4px 4px #3dad88,
+    4px 4px #dd1616;
+  font-weight: bolder;
+}
+.navbarBrand {
+  margin-right: auto;
+}
+.navItems {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 380px;
+  flex-shrink: 0;
+  margin-left: auto;
+  margin-right: 10px;
+}
+.tag {
+  padding: 3px;
+  margin-left: 5px;
+  background: #2dc4b7;
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+  text-align: center;
+  transition: background-color 1s;
+}
+.tag:hover {
+  background-color: #16a597;
+}
+.link {
+  color: #000000;
+  text-decoration: none;
+}
+.link:hover {
+  padding: 5px;
+  color: #184da8;
+}
+.links {
+  display: flex;
+  flex-direction: column;
+}
+.row-container {
+  background: #00f7ff;
+  padding: 15px;
+}
 .comment {
   text-align: center;
 }
@@ -25,4 +83,68 @@
   font-weight: bolder;
   font-size: 18px;
   font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+}
+.info {
+  display: flex;
+  justify-content: center;
+}
+.author {
+  margin-right: 15px;
+}
+
+.social {
+  display: flex;
+  flex-direction: column;
+}
+.address {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.soc {
+  display: flex;
+  flex-direction: column;
+  height: 180px;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+}
+.footer {
+  margin-top: 10px;
+}
+
+.socialLink {
+  text-decoration: none;
+  color: #000000;
+}
+.socialLink:hover {
+  padding: 5px;
+  color: #184da8;
+}
+.cardTitle {
+  font-weight: bolder;
+  font-size: 1.1em;
+}
+.cardSubtitle {
+  font-weight: bold;
+}
+.image {
+  width: 100px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.submitBtn {
+  background: #39b4da;
+  color: white;
+}
+
+.commentBtn {
+  border: none;
+  outline: none;
+  background: gray;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
 }
