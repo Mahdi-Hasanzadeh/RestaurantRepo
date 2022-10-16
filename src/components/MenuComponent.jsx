@@ -1,12 +1,5 @@
-import React, { Component } from "react";
-import {
-  Card,
-  CardImg,
-  CardImgOverlay,
-  CardText,
-  CardTitle,
-  CardBody
-} from "reactstrap";
+import React from "react";
+import { Card, CardImg, CardImgOverlay, CardTitle } from "reactstrap";
 import { Link } from "react-router-dom";
 function Menu(props) {
   var menu = props.data.map(item => {

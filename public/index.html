@@ -40,5 +40,23 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
 </body>
+<script>
+  //()
+  console.log("original Array")
+  const arr = new Array(1, 2, 3, 4, 5, 6, 7, 7, 8, 9);
+  function Person(name, lastName, age) {
+    this.name = name;
+    this.lastName = lastName;
+    this.age = age;
+  }
+
+  const convert = (hours) => {
+    const seconds = Number(hours) * 60 * 60;
+    return Number(seconds);
+  }
+
+  console.log(convert(24));
+
+</script>
 
 </html>

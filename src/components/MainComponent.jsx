@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 //()
 function Main(props) {
   const store = useSelector(store => store);
-  console.log(store.dishes);
+  // console.log(store.dishes);
   // const [state, setState] = React.useState({
   //   dishes: Dishes,
   //   comments: Comments,
@@ -71,7 +71,7 @@ function Main(props) {
             element={
               <DishDetail
                 data={store.dishes.dishes}
-                comments={store.comments.comments}
+                comments={store.comments.comments.comments}
               />
             }
           />

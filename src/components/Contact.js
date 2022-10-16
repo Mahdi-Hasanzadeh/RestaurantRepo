@@ -27,7 +27,7 @@ export default class Contact extends Component {
       return {
         ...prevData,
         [name]: type === "checkbox" ? checked : value
-      };
+      };      
     });
   };
 

@@ -18,17 +18,21 @@ import {
 } from "reactstrap";
 import { useDispatch } from "react-redux";
 import { useParams, Link } from "react-router-dom";
-import { Control, LocalForm, Errors } from "react-redux-form";
 import { addComment } from "../ConfigureStore.js";
-const required = val => val && val.length;
-const maxLength = len => val => !val || val.length <= len;
-const minLength = len => val => val && val.length >= len;
 
 class CommentForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      author: "",
+      rating: "",
+      comment: "",
+      touched: {
+        author: false,
+        rating: false,
+        comment: false
+      }
     };
   }
   handleToggle = () => {
@@ -40,13 +44,82 @@ class CommentForm extends Component {
   };
   //()
 
-  handleSubmit = values => {
+  handlechange = event => {
+    const { name, value } = event.target;
+    this.setState(prevData => {
+      return {
+        ...prevData,
+        [name]: value
+      };
+    });
+  };
+
+  validation = (rating, author, comment) => {
+    const errors = {
+      rating: "",
+      author: "",
+      comment: "",
+      isRating: false,
+      isAuthor: false,
+      iscomment: false
+    };
+    if (this.state.touched.rating && rating === "") {
+      errors.rating = "Required, rate our food please";
+    } else {
+      errors.isRating = true;
+    }
+
+    if (this.state.touched.author && author.length < 3) {
+      errors.author = "Name Should be at least 3 characters";
+    } else if (this.state.touched.author && author.length > 15) {
+      errors.author = "Name Should be at max 15 characters";
+    } else {
+      errors.isAuthor = true;
+    }
+
+    if (this.state.touched.comment && comment.length === 0) {
+      errors.comment = "Required, Please write a comment";
+    } else {
+      errors.iscomment = true;
+    }
+
+    return errors;
+  };
+
+  handleBlur = event => {
+    const { name } = event.target;
+    this.setState(prevData => {
+      return {
+        ...prevData,
+        touched: {
+          ...prevData.touched,
+          [name]: true
+        }
+      };
+    });
+  };
+
+  handleSubmit = event => {
+    const errors = this.validation(
+      this.state.rating,
+      this.state.author,
+      this.state.comment
+    );
+
+    if (
+      errors.isRating === false ||
+      errors.isAuthor === false ||
+      errors.iscomment === false
+    ) {
+      event.preventDefault();
+      return;
+    }
     this.props.dispatch(
       addComment({
         dishId: this.props.dishId,
-        author: values.author,
-        comment: values.comment,
-        rating: values.rating
+        author: this.state.author,
+        comment: this.state.comment,
+        rating: this.state.rating
       })
     );
     this.handleToggle();
@@ -63,11 +136,19 @@ class CommentForm extends Component {
     //   setIsOpen(prevData => !prevData);
     // }
   };
+  //()
+
   render() {
+    const errors = this.validation(
+      this.state.rating,
+      this.state.author,
+      this.state.comment
+    );
+    console.log(errors);
     return (
       <React.Fragment>
         <div className="col-5 mb-2 ">
-          <i className="">
+          <i>
             <button onClick={this.handleToggle} className="commentBtn">
               Submit Comment
             </button>
@@ -81,95 +162,78 @@ class CommentForm extends Component {
             Submit Comment
           </ModalHeader>
           <ModalBody>
-            <LocalForm onSubmit={values => this.handleSubmit(values)}>
-              <Row className="form-group">
-                <Label htmlFor="rating">Rating</Label>
-                <Control.select
-                  className="form-control"
-                  name="rating"
-                  model=".rating"
-                  id="rating"
-                  validators={{
-                    required
-                  }}
-                >
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                </Control.select>
-
-                <Errors
-                  className="text-danger"
-                  model=".rating"
-                  show="touched"
-                  messages={{
-                    required: "Required"
-                  }}
-                />
-              </Row>
-              <br />
-              <Row className="form-group">
-                <Label htmlFor="author">Name</Label>
-                <Control.text
-                  model=".author"
-                  className="form-control"
-                  placeholder="Name"
-                  name="author"
-                  id="author"
-                  validators={{
-                    required,
-                    minLength: minLength(3),
-                    maxLength: maxLength(15)
-                  }}
-                />
-                <Errors
-                  className="text-danger"
-                  model=".author"
-                  show="touched"
-                  messages={{
-                    required: "Required,",
-                    minLength: "Name Should be at least 3 Characters",
-                    maxLength: "Name Should be at max 15 Characters"
-                  }}
-                />
-              </Row>
-              <br />
-              <Row className="form-group">
-                <Label htmlFor="comment">Comment</Label>
-                <Control.textarea
-                  row="6"
-                  className="form-control"
-                  model=".comment"
-                  placeholder="Your Comment Here..."
-                  name="comment"
-                  id="comment"
-                  validators={{
-                    required,
-                    minLength: minLength(1)
-                  }}
-                />
-                <Errors
-                  className="text-danger"
-                  model=".comment"
-                  show="touched"
-                  messages={{
-                    required: "Required,",
-                    minLength: "Write a comment"
-                  }}
-                />
-              </Row>
-              <Row className="form-group">
-                <Col>
+            <Form onSubmit={this.handleSubmit}>
+              <FormGroup row>
+                <Label md={2} htmlFor="rating">
+                  Rating
+                </Label>
+                <Col md={10}>
+                  <Input
+                    onBlur={this.handleBlur}
+                    onChange={this.handlechange}
+                    type="select"
+                    name="rating"
+                    id="rating"
+                    value={this.state.rating}
+                    valid={errors.rating === ""}
+                    invalid={errors.rating != ""}
+                  >
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </Input>
+                  <FormFeedback>{errors.rating}</FormFeedback>
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Label md={2} htmlFor="author">
+                  Name
+                </Label>
+                <Col md={10}>
+                  <Input
+                    onBlur={this.handleBlur}
+                    onChange={this.handlechange}
+                    placeholder="Name"
+                    name="author"
+                    value={this.state.author}
+                    id="author"
+                    valid={errors.author === ""}
+                    invalid={errors.author != ""}
+                  />
+                  <FormFeedback>{errors.author}</FormFeedback>
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Label md={2} htmlFor="comment">
+                  Comment
+                </Label>
+                <Col md={10}>
+                  <Input
+                    onBlur={this.handleBlur}
+                    onChange={this.handlechange}
+                    type="textarea"
+                    placeholder="Your Comment Here..."
+                    name="comment"
+                    id="comment"
+                    value={this.state.comment}
+                    valid={errors.comment === ""}
+                    invalid={errors.comment != ""}
+                  />
+                  <FormFeedback>{errors.comment}</FormFeedback>
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Col md={{ size: 8, offset: 3 }}>
                   <Input
                     type="submit"
                     value="Submit"
                     className="mt-1 bg bg-primary text-white"
                   />
                 </Col>
-              </Row>
-            </LocalForm>
+              </FormGroup>
+            </Form>
           </ModalBody>
         </Modal>
       </React.Fragment>
