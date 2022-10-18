@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Loading from "./Loading.js";
 import {
   Card,
   CardBody,
@@ -13,8 +14,7 @@ import {
   Col,
   Input,
   Label,
-  FormFeedback,
-  Row
+  FormFeedback
 } from "reactstrap";
 import { useDispatch } from "react-redux";
 import { useParams, Link } from "react-router-dom";
@@ -144,7 +144,7 @@ class CommentForm extends Component {
       this.state.author,
       this.state.comment
     );
-    console.log(errors);
+    //console.log(errors);
     return (
       <React.Fragment>
         <div className="col-5 mb-2 ">
@@ -176,7 +176,7 @@ class CommentForm extends Component {
                     id="rating"
                     value={this.state.rating}
                     valid={errors.rating === ""}
-                    invalid={errors.rating != ""}
+                    invalid={errors.rating !== ""}
                   >
                     <option>1</option>
                     <option>2</option>
@@ -200,7 +200,7 @@ class CommentForm extends Component {
                     value={this.state.author}
                     id="author"
                     valid={errors.author === ""}
-                    invalid={errors.author != ""}
+                    invalid={errors.author !== ""}
                   />
                   <FormFeedback>{errors.author}</FormFeedback>
                 </Col>
@@ -219,7 +219,7 @@ class CommentForm extends Component {
                     id="comment"
                     value={this.state.comment}
                     valid={errors.comment === ""}
-                    invalid={errors.comment != ""}
+                    invalid={errors.comment !== ""}
                   />
                   <FormFeedback>{errors.comment}</FormFeedback>
                 </Col>
@@ -242,67 +242,34 @@ class CommentForm extends Component {
 }
 
 function DishDetail(props) {
-  const [isOpen, setIsOpen] = React.useState(false);
+  //const [isOpen, setIsOpen] = React.useState(false);
   const dispatch = useDispatch();
+
   const { productId } = useParams();
-  const dish = props.data.filter(item => item.id == productId)[0];
-  const comments = props.comments.filter(item => item.dishId == productId);
-
-  // const [formData, setFormData] = React.useState({
-  //   name: "",
-  //   rating: "1",
-  //   comment: "",
-  //   Touched: {
-  //     name: false,
-  //     comment: false
-  //   }
-  // });
-
-  // const handleChange = event => {
-  //   const { name, value } = event.target;
-  //   setFormData(prevData => {
-  //     return {
-  //       ...prevData,
-  //       [name]: value
-  //     };
-  //   });
-  // };
-
-  // const handleBlur = event => {
-  //   const { name } = event.target;
-  //   setFormData(prevData => {
-  //     return {
-  //       ...prevData,
-  //       Touched: {
-  //         ...prevData.Touched,
-  //         [name]: true
-  //       }
-  //     };
-  //   });
-  // };
-
-  // const validation = (name, comment) => {
-  //   const errors = {
-  //     name: "",
-  //     comment: ""
-  //   };
-  //   if (formData.Touched.name && name.length < 3) {
-  //     errors.name = "Name Should be at least 2 Characters";
-  //   } else if (formData.Touched.name && name.length > 15) {
-  //     errors.name = "Name Should be utmost 15 Characters";
-  //   }
-
-  //   if (formData.Touched.comment && comment.length < 3) {
-  //     errors.comment = "comment Should be at least 3 Characters";
-  //   }
-
-  //   return errors;
-  // };
-  // const errors = validation(formData.name, formData.comment);
-
+  //C () ?
+  //console.log("dishDetail", props.data);
+  const dish =
+    props.data.status === false
+      ? props.data
+      : props.data.filter(item => Number(item.id) === Number(productId))[0];
+  const comments =
+    props.comments.status === false
+      ? props.comments
+      : props.comments.filter(
+          item => Number(item.dishId) === Number(productId)
+        );
   function renderDish() {
     window.scrollTo(10, 10);
-    return (
+    return dish.status === false ? (
+      <div className="col-12 col-md-5">
+        <h1>Something Went Wrong for fetching Dish</h1>
+        {dish.error}
+      </div>
+    ) : dish === "undefined" ? (
+      <div className="col-12 col-md-5">
+        <h1>Dish is not found,check again</h1>
+      </div>
+    ) : (
       <div className="col-12 col-md-5 ">
         <Card>
           <CardImg width="100%" src={dish.image} alt={dish.name} />
@@ -316,7 +283,12 @@ function DishDetail(props) {
   }
 
   function renderComment() {
-    return (
+    return comments.status === false ? (
+      <div className="col-12 col-md-5">
+        <h1>Something Went Wrong for fetching Comments</h1>
+        {comments.error}
+      </div>
+    ) : (
       <div className=" col-12 col-md-5 comment ">
         <Card>
           <CardTitle>
@@ -346,7 +318,11 @@ function DishDetail(props) {
       </div>
     );
   }
-  return (
+
+  //C () ?
+  return props.isLoading || props.isLoadingDish ? (
+    <Loading />
+  ) : (
     <React.Fragment>
       <div className="container">
         <div className="tag">
@@ -354,20 +330,27 @@ function DishDetail(props) {
             Menu
           </Link>
         </div>
-        <h2>{dish.name}</h2>
+        {dish !== undefined ? <h2>{dish.name}</h2> : null}
         <hr />
       </div>
       <div className="container">
         <div className="row justify-content-center">
-          {renderDish()}
-          {renderComment()}
+          {dish === undefined ? (
+            <h1>No Dish Found,Please choose from Menu</h1>
+          ) : props.data.status === false ? (
+            renderDish()
+          ) : (
+            <React.Fragment>
+              {renderDish()} {renderComment()}
+            </React.Fragment>
+          )}
         </div>
       </div>
     </React.Fragment>
   );
 }
-{
-  /* <div className="col-12">
+
+/* <div className="col-12">
             <Form onSubmit={handleSubmit}>
               <FormGroup row>
                 <Label htmlFor="rating">Rating</Label>
@@ -432,5 +415,56 @@ function DishDetail(props) {
               </FormGroup>
             </Form>
           </div> */
-}
 export default DishDetail;
+//console.log(props.isLoading);
+// const [formData, setFormData] = React.useState({
+//   name: "",
+//   rating: "1",
+//   comment: "",
+//   Touched: {
+//     name: false,
+//     comment: false
+//   }
+// });
+
+// const handleChange = event => {
+//   const { name, value } = event.target;
+//   setFormData(prevData => {
+//     return {
+//       ...prevData,
+//       [name]: value
+//     };
+//   });
+// };
+
+// const handleBlur = event => {
+//   const { name } = event.target;
+//   setFormData(prevData => {
+//     return {
+//       ...prevData,
+//       Touched: {
+//         ...prevData.Touched,
+//         [name]: true
+//       }
+//     };
+//   });
+// };
+
+// const validation = (name, comment) => {
+//   const errors = {
+//     name: "",
+//     comment: ""
+//   };
+//   if (formData.Touched.name && name.length < 3) {
+//     errors.name = "Name Should be at least 2 Characters";
+//   } else if (formData.Touched.name && name.length > 15) {
+//     errors.name = "Name Should be utmost 15 Characters";
+//   }
+
+//   if (formData.Touched.comment && comment.length < 3) {
+//     errors.comment = "comment Should be at least 3 Characters";
+//   }
+
+//   return errors;
+// };
+// const errors = validation(formData.name, formData.comment);

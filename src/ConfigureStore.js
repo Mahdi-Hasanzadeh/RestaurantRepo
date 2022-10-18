@@ -3,34 +3,102 @@ import {
   createSlice,
   createAsyncThunk
 } from "@reduxjs/toolkit";
-import Dishes from "./shared/dishes.js";
-import Comments from "./shared/Comments.js";
-import Promotions from "./shared/Promotions.js";
-import Leaders from "./shared/Leaders.js";
 
 //()
 //C
+const url = "http://localhost:5000/";
 
 const initialStateForDishes = {
-  dishes: Dishes,
-  isLoading: false
+  dishes: [],
+  isLoading: true
 };
 
 const initialStateForComments = {
-  comments: Comments
+  comments: [],
+  isLoading: true
 };
 
 const initialStateForLeaders = {
-  leaders: Leaders
+  leaders: [],
+  isLoading: true
 };
 
 const initialStateForPromotions = {
-  promotions: Promotions
+  promotions: [],
+  isLoading: true
+};
+
+const fetchData = async ulrSection => {
+  try {
+    const response = await fetch(`${url}${ulrSection}`);
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      const error = response.status + ":" + response.statusText;
+      const throwable = {
+        status: response.ok,
+        error: error
+      };
+      throw throwable;
+    }
+  } catch (err) {
+    console.log(err.message);
+    if (err.message === "Failed to fetch") {
+      return {
+        status: false,
+        error: err.message
+      };
+    } else {
+      return err;
+    }
+  }
+};
+
+export const getLeaders = createAsyncThunk("leader/getLeaders", () => {
+  return fetchData("leaders");
+});
+
+export const getComments = createAsyncThunk("comments/getComments", () => {
+  return fetchData("comments");
+});
+
+export const getDishes = createAsyncThunk("dishes/getDishes", () => {
+  return fetchData("dishes");
+});
+
+export const getPromotions = createAsyncThunk(
+  "promotions/getPromotions",
+  () => {
+    return fetchData("promotions");
+  }
+);
+
+const Add = async value => {
+  await fetch(`${url}comments`, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json"
+    },
+    body: JSON.stringify(value)
+  });
 };
 
 const dishesSlice = createSlice({
   name: "dishes",
-  initialState: initialStateForDishes
+  initialState: initialStateForDishes,
+  extraReducers: {
+    [getDishes.pending]: state => {
+      state.isLoading = true;
+    },
+    [getDishes.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.dishes = action.payload;
+    },
+    [getDishes.rejected]: state => {
+      state.isLoading = false;
+    }
+  }
 });
 
 const commentsSlice = createSlice({
@@ -41,29 +109,64 @@ const commentsSlice = createSlice({
       const newcomment = {
         id: state.comments.comments.length,
         dishId: action.payload.dishId,
-        rating:
-          action.payload.rating === "undefined" ? 1 : action.payload.rating,
+        rating: action.payload.rating,
         comment: action.payload.comment,
         author: action.payload.author,
         date: new Date().toLocaleDateString()
       };
-      // console.log(state.comments.length);
-      // console.log(action.payload);
-      // console.log(state.comments.comments);
       state.comments.comments.push(newcomment);
+      Add(newcomment);
       //?
+      //()
+      //C
+    }
+  },
+  extraReducers: {
+    [getComments.pending]: state => {
+      state.comments.isLoading = true;
+    },
+    [getComments.fulfilled]: (state, action) => {
+      state.comments.isLoading = false;
+      state.comments.comments = action.payload;
+    },
+    [getComments.rejected]: state => {
+      state.comments.isLoading = false;
     }
   }
 });
 
 const leadersSlice = createSlice({
   name: "leader",
-  initialState: initialStateForLeaders
+  initialState: initialStateForLeaders,
+  extraReducers: {
+    [getLeaders.pending]: state => {
+      state.isLoading = true;
+    },
+    [getLeaders.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.leaders = action.payload;
+    },
+    [getLeaders.rejected]: state => {
+      state.isLoading = false;
+    }
+  }
 });
 
 const promotionsSlice = createSlice({
   name: "promotions",
-  initialState: initialStateForPromotions
+  initialState: initialStateForPromotions,
+  extraReducers: {
+    [getPromotions.pending]: state => {
+      state.isLoading = true;
+    },
+    [getPromotions.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.promotions = action.payload;
+    },
+    [getPromotions.rejected]: state => {
+      state.isLoading = false;
+    }
+  }
 });
 
 export const { addComment } = commentsSlice.actions;

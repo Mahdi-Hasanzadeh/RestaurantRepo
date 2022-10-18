@@ -1,12 +1,18 @@
 import React from "react";
-import RenderLeader from "./RenderLeader.js";
+import Loading from "./Loading.js";
+//import RenderLeader from "./RenderLeader.js";
 import { Card, CardBody, CardHeader, Media } from "reactstrap";
 import { Link } from "react-router-dom";
+//C () ?
 
 function About(props) {
-  const leaders = props.leaders.map(leader => {
-    return <RenderLeader key={leader.id} leader={leader} />;
-  });
+  //console.log("about", props.leaders);
+  const leaders =
+    props.leaders.status === false
+      ? props.leaders.error
+      : props.leaders.map(leader => {
+          return <RenderLeader key={leader.id} leader={leader} />;
+        });
 
   function RenderLeader(props) {
     return (
@@ -31,6 +37,7 @@ function About(props) {
       </Media>
     );
   }
+  //C () ?
   return (
     <div className="container">
       <div className="tag">
@@ -110,7 +117,9 @@ function About(props) {
         </div>
         <hr />
         {/* <div className="col-12">{leaders}</div> */}
-        <div className="row">{leaders}</div>
+        <div className="row">
+          {props.isLoadingLeader ? <Loading /> : leaders}
+        </div>
       </div>
     </div>
   );

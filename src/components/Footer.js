@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 export default class Footer extends Component {
   render() {
     return (
@@ -40,10 +40,30 @@ export default class Footer extends Component {
             <div className="social row-container col-12 col-md-4">
               <div className="soc">
                 <h4>Social Media</h4>
-                <a className="socialLink fa fa-instagram fa-lg">Instagram</a>
-                <a className="socialLink fa fa-facebook fa-lg">Facebook</a>
-                <a className="socialLink fa fa-twitter fa-lg">Twitter</a>
-                <a className="socialLink fa fa-youtube fa-lg">Youtube</a>
+                <a
+                  href="www.instagram.com"
+                  className="socialLink fa fa-instagram fa-lg"
+                >
+                  Instagram
+                </a>
+                <a
+                  href="www.facebook.com"
+                  className="socialLink fa fa-facebook fa-lg"
+                >
+                  Facebook
+                </a>
+                <a
+                  href="www.twitter.com"
+                  className="socialLink fa fa-twitter fa-lg"
+                >
+                  Twitter
+                </a>
+                <a
+                  href="www.youtube.com"
+                  className="socialLink fa fa-youtube fa-lg"
+                >
+                  Youtube
+                </a>
               </div>
             </div>
           </div>

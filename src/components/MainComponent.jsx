@@ -11,27 +11,36 @@ import About from "./About.js";
 
 import "../App.css";
 import { Routes, Route, Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  getComments,
+  getLeaders,
+  getDishes,
+  getPromotions
+} from "../ConfigureStore.js";
 //()
 function Main(props) {
+  const dispatch = useDispatch();
   const store = useSelector(store => store);
-  // console.log(store.dishes);
-  // const [state, setState] = React.useState({
-  //   dishes: Dishes,
-  //   comments: Comments,
-  //   leaders: Leaders,
-  //   promotions: Promotions
-  // });
-  // function handleClck(value) {
-  //   document.getElementById("selectedItem");
-  //   setState(prevData => {
-  //     return {
-  //       ...prevData,
-  //       selectedFood: value
-  //     };
-  //   });
-  // }
+  const isLoading = store.comments.comments.isLoading;
+  const isLoadingLeader = store.leaders.isLoading;
+  const isLoadingDish = store.dishes.isLoading;
+  const isLoadingPromotion = store.promotions.isLoading;
 
+  React.useEffect(
+    () => {
+      //console.log("effect");
+      setTimeout(() => {
+        dispatch(getLeaders());
+        dispatch(getComments());
+        dispatch(getDishes());
+      }, 1500);
+      setTimeout(() => {
+        dispatch(getPromotions());
+      }, 2500);
+    },
+    [dispatch]
+  );
   function BasicLayout() {
     return (
       <React.Fragment>
@@ -41,16 +50,21 @@ function Main(props) {
       </React.Fragment>
     );
   }
-  const featuredDish = store.dishes.dishes.filter(
-    item => item.featured === true
-  )[0];
-  const featuredLeader = store.leaders.leaders.filter(
-    item => item.featured === true
-  )[0];
-  // <Header />
-  //     <Menu data={state.dishes} />
-  //     <DishDetail selectedDish={state.selectedFood} />
-  //     <Footer />
+  //C () ?
+  const featuredDish =
+    store.dishes.dishes.status === false
+      ? store.dishes.dishes
+      : store.dishes.dishes.filter(item => item.featured)[0];
+  const featuredLeader =
+    store.leaders.leaders.status === false
+      ? store.leaders.leaders
+      : store.leaders.leaders.filter(item => item.featured === true)[0];
+
+  const promotion =
+    store.promotions.promotions.status === false
+      ? store.promotions.promotions
+      : store.promotions.promotions[0];
+
   return (
     <React.Fragment>
       <Routes>
@@ -59,17 +73,28 @@ function Main(props) {
             index
             element={
               <Home
-                promotion={store.promotions.promotions[0]}
+                isLoadingDish={isLoadingDish}
+                isLoadingPromotion={isLoadingPromotion}
+                isLoadingLeader={isLoadingLeader}
+                promotion={promotion}
                 featuredLeader={featuredLeader}
                 featuredDish={featuredDish}
               />
             }
           />
-          <Route path="menu" element={<Menu data={store.dishes.dishes} />} />
+          <Route
+            path="menu"
+            element={
+              <Menu isLoadingDish={isLoadingDish} data={store.dishes.dishes} />
+            }
+          />
           <Route
             path="menu/:productId"
             element={
               <DishDetail
+                isLoadingDish={isLoadingDish}
+                isLoadingPromotion={isLoadingPromotion}
+                isLoading={isLoading}
                 data={store.dishes.dishes}
                 comments={store.comments.comments.comments}
               />
@@ -78,7 +103,25 @@ function Main(props) {
           <Route path="Contact" element={<Contact />} />
           <Route
             path="About"
-            element={<About leaders={store.leaders.leaders} />}
+            element={
+              <About
+                isLoadingLeader={isLoadingLeader}
+                leaders={store.leaders.leaders}
+              />
+            }
+          />
+
+          <Route
+            path="*"
+            element={
+              <div className="container">
+                <div className="row">
+                  <div className="col-12">
+                    <h1>Page Not Found: 404</h1>
+                  </div>
+                </div>
+              </div>
+            }
           />
         </Route>
       </Routes>

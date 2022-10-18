@@ -154,3 +154,7 @@ body {
   text-decoration: none;
   margin-right: 5px;
 }
+.homeLoading {
+  display: flex;
+  justify-content: center;
+}
