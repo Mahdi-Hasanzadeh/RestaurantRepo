@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import { Form, FormGroup, Label, Input, Col, FormFeedback } from "reactstrap";
 import { Link } from "react-router-dom";
-export default class Contact extends Component {
+import { motion } from "framer-motion";
+import { postFeedback } from "../ConfigureStore.js";
+import { useDispatch } from "react-redux";
+export default function My(props) {
+  const dispatch = useDispatch();
+  return <Contact dispatch={dispatch} />;
+}
+class Contact extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,13 +17,14 @@ export default class Contact extends Component {
       email: "",
       telNumber: "",
       agree: false,
-      contactType: "",
+      contactType: "Telephone Number",
       message: "",
       touched: {
         firstName: false,
         lastName: false,
         email: false,
-        telNumber: false
+        telNumber: false,
+        message: false
       }
     };
   }
@@ -27,12 +35,60 @@ export default class Contact extends Component {
       return {
         ...prevData,
         [name]: type === "checkbox" ? checked : value
-      };      
+      };
     });
   };
 
   handleSubmit = event => {
+    //alert("submit");
+
+    //this.validate;
+    const errors = this.validate(
+      this.state.firstName,
+      this.state.lastName,
+      this.state.email,
+      this.state.telNumber,
+      this.state.message
+    );
     event.preventDefault();
+    if (
+      errors.isfirstName === false ||
+      errors.isLastName === false ||
+      errors.isEmail === false ||
+      errors.isTelNumber === false ||
+      errors.isMessage === false
+    ) {
+      event.preventDefault();
+    } else {
+      const feedback = {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        telNumber: this.state.telNumber,
+        agree: this.state.agree,
+        contactType: this.state.contactType,
+        message: this.state.message
+      };
+      this.props.dispatch(postFeedback(feedback));
+      this.setState(prevData => {
+        return {
+          firstName: "",
+          lastName: "",
+          email: "",
+          telNumber: "",
+          agree: false,
+          contactType: "",
+          message: "",
+          touched: {
+            firstName: false,
+            lastName: false,
+            email: false,
+            telNumber: false,
+            message: false
+          }
+        };
+      });
+    }
   };
 
   handleOnBlur = event => {
@@ -44,29 +100,41 @@ export default class Contact extends Component {
       };
     });
   };
-  validate = (firstName, lastName, email, telNumber) => {
+  validate = (firstName, lastName, email, telNumber, message) => {
     const errors = {
       firstName: "",
       lastName: "",
       email: "",
-      telNumber: ""
+      telNumber: "",
+      message: "",
+      isfirstName: false,
+      isLastName: false,
+      isEmail: false,
+      isTelNumber: false,
+      isMessage: false
     };
 
     if (this.state.touched.firstName && firstName.length <= 3) {
       errors.firstName = "First Name Should Be at least 3 Characters";
     } else if (this.state.touched.firstName && firstName.length > 15) {
       errors.firstName = "First Name Should Be at most 15 Characters";
+    } else {
+      errors.isfirstName = true;
     }
     if (this.state.touched.lastName && lastName.length <= 3) {
       errors.lastName = "First Name Should Be at least 3 Characters";
     } else if (this.state.touched.lastName && lastName.length > 15) {
       errors.lastName = "First Name Should Be at most 15 Characters";
+    } else {
+      errors.isLastName = true;
     }
 
     const reg = /^\d+$/;
 
     if (this.state.touched.telNumber && !reg.test(telNumber)) {
       errors.telNumber = "Telephone Number Should contains only digits";
+    } else {
+      errors.isTelNumber = true;
     }
 
     if (
@@ -76,18 +144,33 @@ export default class Contact extends Component {
       errors.email = "Email Should Contain ( @ )";
     } else if (this.state.touched.email && email.split("@")[0].length < 6) {
       errors.email = "email too short";
+    } else {
+      errors.isEmail = true;
+    }
+
+    if (this.state.touched.message && message.length < 1) {
+      errors.message = "Please write your Feedback";
+    } else {
+      errors.isMessage = true;
     }
     return errors;
   };
   render() {
+    //window.scroll(0, 0);
     const errors = this.validate(
       this.state.firstName,
       this.state.lastName,
       this.state.email,
-      this.state.telNumber
+      this.state.telNumber,
+      this.state.message
     );
     return (
-      <div className="container">
+      <motion.div
+        intial={{ width: 0 }}
+        animate={{ width: "100%" }}
+        exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
+        className="container"
+      >
         <div className="tag">
           <Link className="link" to="/">
             Home
@@ -240,7 +323,11 @@ export default class Contact extends Component {
                     value={this.state.message}
                     placeholder="Your Feedback here..."
                     onChange={this.handleFormData}
+                    valid={errors.message === ""}
+                    invalid={errors.message !== ""}
+                    onBlur={this.handleOnBlur}
                   />
+                  <FormFeedback>{errors.message}</FormFeedback>
                 </Col>
               </FormGroup>
               <FormGroup row>
@@ -255,7 +342,7 @@ export default class Contact extends Component {
             </Form>
           </div>
         </div>
-      </div>
+      </motion.div>
     );
   }
 }

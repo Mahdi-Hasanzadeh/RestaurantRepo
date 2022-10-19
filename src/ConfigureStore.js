@@ -75,13 +75,33 @@ export const getPromotions = createAsyncThunk(
 );
 
 const Add = async value => {
-  await fetch(`${url}comments`, {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json"
-    },
-    body: JSON.stringify(value)
-  });
+  try {
+    await fetch(`${url}comments`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(value)
+    });
+  } catch (error) {
+    alert("something went wrong");
+  }
+};
+
+const saveFeedback = async value => {
+  try {
+    const res = await fetch(`${url}feedback`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(value)
+    });
+    const data = await res.json();
+    alert(JSON.stringify(data));
+  } catch (error) {
+    alert("something went wrong");
+  }
 };
 
 const dishesSlice = createSlice({
@@ -114,8 +134,10 @@ const commentsSlice = createSlice({
         author: action.payload.author,
         date: new Date().toLocaleDateString()
       };
-      state.comments.comments.push(newcomment);
       Add(newcomment);
+
+      state.comments.comments.push(newcomment);
+
       //?
       //()
       //C
@@ -168,14 +190,26 @@ const promotionsSlice = createSlice({
     }
   }
 });
+const feedbackSlice = createSlice({
+  name: "feedback",
+  initialState: [],
+  reducers: {
+    postFeedback: (state, action) => {
+      console.log(action.payload);
+      saveFeedback(action.payload);
+    }
+  }
+});
 
 export const { addComment } = commentsSlice.actions;
+export const { postFeedback } = feedbackSlice.actions;
 
 export const store = configureStore({
   reducer: {
     dishes: dishesSlice.reducer,
     comments: commentsSlice.reducer,
     promotions: promotionsSlice.reducer,
-    leaders: leadersSlice.reducer
+    leaders: leadersSlice.reducer,
+    feedback: feedbackSlice.reducer
   }
 });

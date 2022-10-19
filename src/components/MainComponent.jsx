@@ -10,16 +10,20 @@ import Contact from "./Contact.js";
 import About from "./About.js";
 
 import "../App.css";
-import { Routes, Route, Outlet } from "react-router-dom";
+import { Routes, Route, Outlet, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+//import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { AnimatePresence } from "framer-motion";
 import {
   getComments,
   getLeaders,
   getDishes,
   getPromotions
 } from "../ConfigureStore.js";
+
 //()
 function Main(props) {
+  const location = useLocation();
   const dispatch = useDispatch();
   const store = useSelector(store => store);
   const isLoading = store.comments.comments.isLoading;
@@ -29,7 +33,7 @@ function Main(props) {
 
   React.useEffect(
     () => {
-      //console.log("effect");
+      //  console.log("effect");
       setTimeout(() => {
         dispatch(getLeaders());
         dispatch(getComments());
@@ -67,64 +71,69 @@ function Main(props) {
 
   return (
     <React.Fragment>
-      <Routes>
-        <Route path="/" element={<BasicLayout />}>
-          <Route
-            index
-            element={
-              <Home
-                isLoadingDish={isLoadingDish}
-                isLoadingPromotion={isLoadingPromotion}
-                isLoadingLeader={isLoadingLeader}
-                promotion={promotion}
-                featuredLeader={featuredLeader}
-                featuredDish={featuredDish}
-              />
-            }
-          />
-          <Route
-            path="menu"
-            element={
-              <Menu isLoadingDish={isLoadingDish} data={store.dishes.dishes} />
-            }
-          />
-          <Route
-            path="menu/:productId"
-            element={
-              <DishDetail
-                isLoadingDish={isLoadingDish}
-                isLoadingPromotion={isLoadingPromotion}
-                isLoading={isLoading}
-                data={store.dishes.dishes}
-                comments={store.comments.comments.comments}
-              />
-            }
-          />
-          <Route path="Contact" element={<Contact />} />
-          <Route
-            path="About"
-            element={
-              <About
-                isLoadingLeader={isLoadingLeader}
-                leaders={store.leaders.leaders}
-              />
-            }
-          />
+      <AnimatePresence>
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<BasicLayout />}>
+            <Route
+              index
+              element={
+                <Home
+                  isLoadingDish={isLoadingDish}
+                  isLoadingPromotion={isLoadingPromotion}
+                  isLoadingLeader={isLoadingLeader}
+                  promotion={promotion}
+                  featuredLeader={featuredLeader}
+                  featuredDish={featuredDish}
+                />
+              }
+            />
+            <Route
+              path="menu"
+              element={
+                <Menu
+                  isLoadingDish={isLoadingDish}
+                  data={store.dishes.dishes}
+                />
+              }
+            />
+            <Route
+              path="menu/:productId"
+              element={
+                <DishDetail
+                  isLoadingDish={isLoadingDish}
+                  isLoadingPromotion={isLoadingPromotion}
+                  isLoading={isLoading}
+                  data={store.dishes.dishes}
+                  comments={store.comments.comments.comments}
+                />
+              }
+            />
+            <Route path="Contact" element={<Contact />} />
+            <Route
+              path="About"
+              element={
+                <About
+                  isLoadingLeader={isLoadingLeader}
+                  leaders={store.leaders.leaders}
+                />
+              }
+            />
 
-          <Route
-            path="*"
-            element={
-              <div className="container">
-                <div className="row">
-                  <div className="col-12">
-                    <h1>Page Not Found: 404</h1>
+            <Route
+              path="*"
+              element={
+                <div className="container">
+                  <div className="row">
+                    <div className="col-12">
+                      <h1>Page Not Found: 404</h1>
+                    </div>
                   </div>
                 </div>
-              </div>
-            }
-          />
-        </Route>
-      </Routes>
+              }
+            />
+          </Route>
+        </Routes>
+      </AnimatePresence>
     </React.Fragment>
   );
 }

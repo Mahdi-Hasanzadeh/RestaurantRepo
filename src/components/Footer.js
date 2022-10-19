@@ -15,7 +15,7 @@ export default class Footer extends Component {
                 <Link className="link" to="/menu">
                   <i className="fa fa-list">Menu</i>
                 </Link>
-                <Link className="link" to="/">
+                <Link className="link" to="/about">
                   <i className="fa fa-info-circle">About</i>
                 </Link>
                 <Link className="link" to="/Contact">

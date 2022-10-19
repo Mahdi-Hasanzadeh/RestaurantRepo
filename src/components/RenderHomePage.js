@@ -8,6 +8,7 @@ import {
   CardTitle,
   CardSubtitle
 } from "reactstrap";
+// import { motion } from "framer-motion";
 export default function RenderHomePage(props) {
   //C () ?
   function Render() {

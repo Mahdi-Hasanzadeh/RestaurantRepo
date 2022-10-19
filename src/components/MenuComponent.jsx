@@ -2,9 +2,10 @@ import React from "react";
 import Loading from "./Loading.js";
 import { Card, CardImg, CardImgOverlay, CardTitle } from "reactstrap";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 function Menu(props) {
   //console.log(props.data);
-
+  window.scroll(0, 0);
   var menu =
     props.data.status === false ? (
       <div>
@@ -29,7 +30,12 @@ function Menu(props) {
   //C () ?
   return (
     <React.Fragment>
-      <div className="container">
+      <motion.div
+        intial={{ width: 0 }}
+        animate={{ width: "100%" }}
+        exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
+        className="container"
+      >
         <div className="tag">
           <Link className="link" to="/">
             Home
@@ -41,7 +47,7 @@ function Menu(props) {
         <div className="row justify-content-center">
           {props.isLoadingDish ? <Loading /> : menu}
         </div>
-      </div>
+      </motion.div>
     </React.Fragment>
   );
 }

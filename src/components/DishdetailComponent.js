@@ -9,7 +9,6 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  Form,
   FormGroup,
   Col,
   Input,
@@ -19,14 +18,14 @@ import {
 import { useDispatch } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { addComment } from "../ConfigureStore.js";
-
+import { motion } from "framer-motion";
 class CommentForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isOpen: false,
       author: "",
-      rating: "",
+      rating: 1,
       comment: "",
       touched: {
         author: false,
@@ -139,6 +138,7 @@ class CommentForm extends Component {
   //()
 
   render() {
+    window.moveTo(0, 0);
     const errors = this.validation(
       this.state.rating,
       this.state.author,
@@ -162,78 +162,77 @@ class CommentForm extends Component {
             Submit Comment
           </ModalHeader>
           <ModalBody>
-            <Form onSubmit={this.handleSubmit}>
-              <FormGroup row>
-                <Label md={2} htmlFor="rating">
-                  Rating
-                </Label>
-                <Col md={10}>
-                  <Input
-                    onBlur={this.handleBlur}
-                    onChange={this.handlechange}
-                    type="select"
-                    name="rating"
-                    id="rating"
-                    value={this.state.rating}
-                    valid={errors.rating === ""}
-                    invalid={errors.rating !== ""}
-                  >
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </Input>
-                  <FormFeedback>{errors.rating}</FormFeedback>
-                </Col>
-              </FormGroup>
-              <FormGroup row>
-                <Label md={2} htmlFor="author">
-                  Name
-                </Label>
-                <Col md={10}>
-                  <Input
-                    onBlur={this.handleBlur}
-                    onChange={this.handlechange}
-                    placeholder="Name"
-                    name="author"
-                    value={this.state.author}
-                    id="author"
-                    valid={errors.author === ""}
-                    invalid={errors.author !== ""}
-                  />
-                  <FormFeedback>{errors.author}</FormFeedback>
-                </Col>
-              </FormGroup>
-              <FormGroup row>
-                <Label md={2} htmlFor="comment">
-                  Comment
-                </Label>
-                <Col md={10}>
-                  <Input
-                    onBlur={this.handleBlur}
-                    onChange={this.handlechange}
-                    type="textarea"
-                    placeholder="Your Comment Here..."
-                    name="comment"
-                    id="comment"
-                    value={this.state.comment}
-                    valid={errors.comment === ""}
-                    invalid={errors.comment !== ""}
-                  />
-                  <FormFeedback>{errors.comment}</FormFeedback>
-                </Col>
-              </FormGroup>
-              <FormGroup row>
-                <Col md={{ size: 8, offset: 3 }}>
-                  <Input
-                    type="submit"
-                    value="Submit"
-                    className="mt-1 bg bg-primary text-white"
-                  />
-                </Col>
-              </FormGroup>
-            </Form>
+            <FormGroup row>
+              <Label md={2} htmlFor="rating">
+                Rating
+              </Label>
+              <Col md={10}>
+                <Input
+                  onBlur={this.handleBlur}
+                  onChange={this.handlechange}
+                  type="select"
+                  name="rating"
+                  id="rating"
+                  value={this.state.rating}
+                  valid={errors.rating === ""}
+                  invalid={errors.rating !== ""}
+                >
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </Input>
+                <FormFeedback>{errors.rating}</FormFeedback>
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label md={2} htmlFor="author">
+                Name
+              </Label>
+              <Col md={10}>
+                <Input
+                  onBlur={this.handleBlur}
+                  onChange={this.handlechange}
+                  placeholder="Name"
+                  name="author"
+                  value={this.state.author}
+                  id="author"
+                  valid={errors.author === ""}
+                  invalid={errors.author !== ""}
+                />
+                <FormFeedback>{errors.author}</FormFeedback>
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label md={2} htmlFor="comment">
+                Comment
+              </Label>
+              <Col md={10}>
+                <Input
+                  onBlur={this.handleBlur}
+                  onChange={this.handlechange}
+                  type="textarea"
+                  placeholder="Your Comment Here..."
+                  name="comment"
+                  id="comment"
+                  value={this.state.comment}
+                  valid={errors.comment === ""}
+                  invalid={errors.comment !== ""}
+                />
+                <FormFeedback>{errors.comment}</FormFeedback>
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Col md={{ size: 8, offset: 3 }}>
+                <Input
+                  type="submit"
+                  value="Submit"
+                  className="mt-1 bg bg-primary text-white"
+                  onClick={this.handleSubmit}
+                />
+              </Col>
+            </FormGroup>
           </ModalBody>
         </Modal>
       </React.Fragment>
@@ -323,7 +322,11 @@ function DishDetail(props) {
   return props.isLoading || props.isLoadingDish ? (
     <Loading />
   ) : (
-    <React.Fragment>
+    <motion.div
+      intial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
+    >
       <div className="container">
         <div className="tag">
           <Link className="link" to="/menu">
@@ -346,7 +349,7 @@ function DishDetail(props) {
           )}
         </div>
       </div>
-    </React.Fragment>
+    </motion.div>
   );
 }
 

@@ -3,10 +3,11 @@ import Loading from "./Loading.js";
 //import RenderLeader from "./RenderLeader.js";
 import { Card, CardBody, CardHeader, Media } from "reactstrap";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 //C () ?
 
 function About(props) {
-  //console.log("about", props.leaders);
+  window.scrollTo(5, 5); //console.log("about", props.leaders);
   const leaders =
     props.leaders.status === false
       ? props.leaders.error
@@ -39,7 +40,12 @@ function About(props) {
   }
   //C () ?
   return (
-    <div className="container">
+    <motion.div
+      intial={{ width: 0 }}
+      animate={{ width: "100%" }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
+      className="container"
+    >
       <div className="tag">
         <Link className="link" to="/">
           Home
@@ -121,7 +127,7 @@ function About(props) {
           {props.isLoadingLeader ? <Loading /> : leaders}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
