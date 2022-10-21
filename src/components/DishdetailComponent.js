@@ -18,6 +18,7 @@ import {
 import { useDispatch } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { addComment } from "../ConfigureStore.js";
+import logo1 from "../images//MahdiHasanzadeh.jpg";
 import { motion } from "framer-motion";
 class CommentForm extends Component {
   constructor(props) {
@@ -246,17 +247,17 @@ function DishDetail(props) {
 
   const { productId } = useParams();
   //C () ?
-  //console.log("dishDetail", props.data);
+  //console.log("dishDetail", props.data.filter(item.id));
   const dish =
     props.data.status === false
       ? props.data
-      : props.data.filter(item => Number(item.id) === Number(productId))[0];
+      : props.data.filter(item => item.id === productId)[0];
   const comments =
     props.comments.status === false
       ? props.comments
-      : props.comments.filter(
-          item => Number(item.dishId) === Number(productId)
-        );
+      : props.comments
+          .filter(item => item.dishId === productId)
+          .filter(item => item.rating >= 2);
   function renderDish() {
     window.scrollTo(10, 10);
     return dish.status === false ? (

@@ -59,6 +59,7 @@ function Main(props) {
     store.dishes.dishes.status === false
       ? store.dishes.dishes
       : store.dishes.dishes.filter(item => item.featured)[0];
+
   const featuredLeader =
     store.leaders.leaders.status === false
       ? store.leaders.leaders
@@ -68,6 +69,8 @@ function Main(props) {
     store.promotions.promotions.status === false
       ? store.promotions.promotions
       : store.promotions.promotions[0];
+
+  // console.log(store.dishes.dishes);
 
   return (
     <React.Fragment>

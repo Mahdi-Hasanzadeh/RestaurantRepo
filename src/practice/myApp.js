@@ -1,139 +1,109 @@
-import React from "react";
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarToggler,
-  Collapse,
-  Nav,
-  NavItem,
-  Modal,
-  ModalBody,
-  ModalHeader,
-  ModalFooter
-} from "reactstrap";
-//C () ?
-export default function App() {
-  const [formData, setFormData] = React.useState({
-    bill: 0,
-    tip: 0,
-    discount: function() {
-      if (this.tip === 0) {
-        return this.bill;
-      } else {
-        const result = this.bill * this.tip;
-        const res = result / 100;
-        return this.bill - res;
-      }
-    }
-  });
-  const [peoplecount, setPeoplecount] = React.useState(1);
-  const handlechange = event => {
-    const { name, value } = event.target;
-    if (name === "tip") {
-      if (value > 100) {
-        return;
-      }
-    }
-    setFormData(prevData => {
-      return {
-        ...prevData,
-        [name]: value < 0 ? 0 : value
-      };
-    });
-  };
-  const [Open, setOpen] = React.useState({
-    isNavbarOpen: false,
-    isModalOpen: false
-  });
-  const increase = () => {
-    setPeoplecount(prevData => prevData + 1);
-  };
-  const decrease = () => {
-    if (peoplecount <= 1) {
-      return;
-    }
-    setPeoplecount(prevData => prevData - 1);
-  };
-  const handleToggle = () => {
-    setOpen(prevData => {
-      return {
-        ...prevData,
-        isModalOpen: !prevData.isModalOpen
-      };
-    });
-  };
-  const handleClick = () => {
-    setOpen(prevData => {
-      return {
-        ...prevData,
-        isNavbarOpen: !prevData.isNavbarOpen
-      };
-    });
-  };
-  return (
-    <React.Fragment>
-      <div className="container-fluid">
-        <Navbar expand="md" color="primary">
-          <NavbarToggler onClick={handleClick} />
-          <NavbarBrand>
-            <h1>Hasanzadeh production</h1>
-          </NavbarBrand>
-          <Collapse navbar isOpen={Open.isNavbarOpen}>
-            <Nav>
-              <NavItem>
-                <a className="a" href="www.google.com">
-                  Home
-                </a>
-                <a className="a" href="www.google.com">
-                  Menu
-                </a>
-                <a className="a" href="www.google.com">
-                  About
-                </a>
-                <a className="a" href="www.google.com">
-                  contact
-                </a>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
-      </div>
-      <div className="container-fluid mt-2">
-        <label>Bill</label>
-        <input
-          onChange={handlechange}
-          type="number"
-          placeholder="Bill"
-          name="bill"
-          value={formData.bill}
-        />
-        <label>Tip</label>
+// import React from "react";
+// import "bootstrap/dist/css/bootstrap.min.css";
+// import { Form, FormGroup, Col, Label, Input } from "reactstrap";
+// import { app, database } from "./firebaseconfig.js";
+// import {
+//   getAuth,
+//   signInWithEmailAndPassword,
+//   createUserWithEmailAndPassword
+// } from "firebase/auth";
+// import { collection, addDoc, getDocs } from "firebase/firestore";
+// //C () ?
 
-        <input
-          onChange={handlechange}
-          type="number"
-          placeholder="Tip"
-          name="tip"
-          value={formData.tip}
-        />
-        <p>{`Total is: ${formData.discount() === 0
-          ? 0
-          : (formData.discount() / peoplecount).toFixed(2)} $ `}</p>
+// export default function App() {
+//   const [formData, setFormData] = React.useState({
+//     name: "",
+//     email: "",
+//     password: ""
+//   });
 
-        <button onClick={increase}>+</button>
-        <p> {`People:${peoplecount}`} </p>
-        <button onClick={decrease}>-</button>
-      </div>
-      <Modal isOpen={Open.isModalOpen} toggle={handleToggle}>
-        <ModalHeader color="primary" toggle={handleToggle}>
-          Welcome to Our Restaurant
-        </ModalHeader>
-        <ModalBody>
-          <h4>Are You ready</h4>
-          <button>Let's Go</button>
-        </ModalBody>
-        <ModalFooter>copyright Hasanzadeh production</ModalFooter>
-      </Modal>
-    </React.Fragment>
-  );
-}
+//   const auth = getAuth();
+//   const dbInstance = collection(database, "users");
+//   const handlechange = event => {
+//     const { name, value } = event.target;
+//     setFormData(prevData => {
+//       return {
+//         ...prevData,
+//         [name]: value
+//       };
+//     });
+//   };
+
+//   const handleSubmit = event => {
+//     event.preventDefault();
+//     addDoc(dbInstance, formData)
+//       .then(res => {
+//         console.log(res.id);
+//       })
+//       .catch(error => {
+//         alert(error.message);
+//       });
+//   };
+//   React.useEffect(() => {
+//     getData();
+//     console.log("effect");
+//   }, []);
+//   let data = [];
+//   const getData = async () => {
+//     try {
+//       const response = await getDocs(dbInstance);
+//       const data = await response.docs.map(item => {
+//         console.log(item.data());
+//       });
+//     } catch (error) {
+//       console.log(error.message);
+//     }
+//   };
+//   console.log(data);
+//   return (
+//     <div className="container mt-2">
+//       <div className="row ">
+//         <div className="col-md-8 ">
+//           <Form onSubmit={handleSubmit}>
+//             <FormGroup row>
+//               <Label md={2}>Name</Label>
+//               <Col md={10}>
+//                 <Input
+//                   type="text"
+//                   onChange={handlechange}
+//                   name="name"
+//                   value={formData.name}
+//                   placeholder="Name"
+//                 />
+//               </Col>
+//             </FormGroup>
+
+//             <FormGroup row>
+//               <Label md={2}>Email</Label>
+//               <Col md={10}>
+//                 <Input
+//                   type="text"
+//                   onChange={handlechange}
+//                   name="email"
+//                   value={formData.email}
+//                   placeholder="Email"
+//                 />
+//               </Col>
+//             </FormGroup>
+//             <FormGroup row>
+//               <Label md={2}>Password</Label>
+//               <Col md={10}>
+//                 <Input
+//                   type="text"
+//                   placeholder="Password"
+//                   onChange={handlechange}
+//                   name="password"
+//                   value={formData.password}
+//                 />
+//               </Col>
+//             </FormGroup>
+//             <FormGroup>
+//               <Input id="sign" name="sign" type="submit" value="sign up" />
+//             </FormGroup>
+//           </Form>
+//         </div>
+//       </div>
+//       <button onClick={getData}>getData</button>
+//     </div>
+//   );
+// }
