@@ -25,7 +25,7 @@ function About(props) {
                 width="100px"
                 className="image"
                 object
-                src={props.leader.image}
+                src={require(`../images/${props.leader.image.split("/")[2]}`)}
               />
             </Media>
             <Media body className="ml-5">

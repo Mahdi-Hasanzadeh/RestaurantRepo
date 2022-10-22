@@ -112,6 +112,9 @@ body {
 .footer {
   margin-top: 10px;
 }
+.addresscenter {
+  text-align: center;
+}
 
 .socialLink {
   text-decoration: none;
