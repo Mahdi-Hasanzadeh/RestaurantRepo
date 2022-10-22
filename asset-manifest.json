@@ -1,21 +1,28 @@
 {
   "files": {
-    "main.css": "/RestaurantRepo/static/css/main.0e63d070.css",
-    "main.js": "/RestaurantRepo/static/js/main.9b8990a4.js",
+    "main.css": "/RestaurantRepo/static/css/main.f38cbea1.css",
+    "main.js": "/RestaurantRepo/static/js/main.3303f4e4.js",
     "static/js/787.142da1d4.chunk.js": "/RestaurantRepo/static/js/787.142da1d4.chunk.js",
     "static/media/fontawesome-webfont.svg?v=4.7.0": "/RestaurantRepo/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
     "static/media/fontawesome-webfont.eot": "/RestaurantRepo/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
     "static/media/fontawesome-webfont.ttf?v=4.7.0": "/RestaurantRepo/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
     "static/media/fontawesome-webfont.woff?v=4.7.0": "/RestaurantRepo/static/media/fontawesome-webfont.f691f37e57f04c152e23.woff",
     "static/media/fontawesome-webfont.woff2?v=4.7.0": "/RestaurantRepo/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
+    "static/media/uthappizza.png": "/RestaurantRepo/static/media/uthappizza.e3b6414e4292e7f7802a.png",
+    "static/media/buffet.png": "/RestaurantRepo/static/media/buffet.fe37515a0191a7ef956e.png",
+    "static/media/zucchipakoda.png": "/RestaurantRepo/static/media/zucchipakoda.57b1a046e46917644a54.png",
+    "static/media/vadonut.png": "/RestaurantRepo/static/media/vadonut.c5cd81441d6a6fb7bda6.png",
+    "static/media/alberto.png": "/RestaurantRepo/static/media/alberto.82933185f3416a8bee0d.png",
+    "static/media/logo.png": "/RestaurantRepo/static/media/logo.23118273af0d4ded32b0.png",
+    "static/media/elaicheesecake.png": "/RestaurantRepo/static/media/elaicheesecake.79bcea396a9726301c23.png",
     "static/media/MahdiHasanzadeh.jpg": "/RestaurantRepo/static/media/MahdiHasanzadeh.e68897a0031aaf86b6bb.jpg",
     "index.html": "/RestaurantRepo/index.html",
-    "main.0e63d070.css.map": "/RestaurantRepo/static/css/main.0e63d070.css.map",
-    "main.9b8990a4.js.map": "/RestaurantRepo/static/js/main.9b8990a4.js.map",
+    "main.f38cbea1.css.map": "/RestaurantRepo/static/css/main.f38cbea1.css.map",
+    "main.3303f4e4.js.map": "/RestaurantRepo/static/js/main.3303f4e4.js.map",
     "787.142da1d4.chunk.js.map": "/RestaurantRepo/static/js/787.142da1d4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0e63d070.css",
-    "static/js/main.9b8990a4.js"
+    "static/css/main.f38cbea1.css",
+    "static/js/main.3303f4e4.js"
   ]
 }
