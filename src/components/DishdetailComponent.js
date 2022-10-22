@@ -272,7 +272,11 @@ function DishDetail(props) {
     ) : (
       <div className="col-12 col-md-5 ">
         <Card>
-          <CardImg width="100%" src={dish.image} alt={dish.name} />
+          <CardImg
+            width="100%"
+            src={require(`../images/${dish.image.split("/")[2]}`)}
+            alt={dish.name}
+          />
           <CardBody>
             <CardTitle className="title">{dish.name}</CardTitle>
             <CardText>{dish.description}</CardText>

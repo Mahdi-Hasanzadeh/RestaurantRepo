@@ -8,6 +8,7 @@ import {
   CardTitle,
   CardSubtitle
 } from "reactstrap";
+import logo from "../images/MahdiHasanzadeh.jpg";
 // import { motion } from "framer-motion";
 export default function RenderHomePage(props) {
   //C () ?
@@ -28,9 +29,10 @@ export default function RenderHomePage(props) {
         </Card>
       );
     } else {
+      const slice = props.item.image.split("/")[2];
       return (
         <Card>
-          <CardImg src={props.item.image} alt="" />
+          <CardImg src={require(`../images/${slice}`)} alt={props.item.name} />
           <CardBody>
             <CardTitle className="cardTitle">{props.item.name}</CardTitle>
             {props.item.designation ? (
