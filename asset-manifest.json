@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/RestaurantRepo/static/css/main.f38cbea1.css",
-    "main.js": "/RestaurantRepo/static/js/main.fffef329.js",
+    "main.js": "/RestaurantRepo/static/js/main.66665a73.js",
     "static/js/787.142da1d4.chunk.js": "/RestaurantRepo/static/js/787.142da1d4.chunk.js",
     "static/media/fontawesome-webfont.svg?v=4.7.0": "/RestaurantRepo/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
     "static/media/fontawesome-webfont.eot": "/RestaurantRepo/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
@@ -18,11 +18,11 @@
     "static/media/MahdiHasanzadeh.jpg": "/RestaurantRepo/static/media/MahdiHasanzadeh.e68897a0031aaf86b6bb.jpg",
     "index.html": "/RestaurantRepo/index.html",
     "main.f38cbea1.css.map": "/RestaurantRepo/static/css/main.f38cbea1.css.map",
-    "main.fffef329.js.map": "/RestaurantRepo/static/js/main.fffef329.js.map",
+    "main.66665a73.js.map": "/RestaurantRepo/static/js/main.66665a73.js.map",
     "787.142da1d4.chunk.js.map": "/RestaurantRepo/static/js/787.142da1d4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f38cbea1.css",
-    "static/js/main.fffef329.js"
+    "static/js/main.66665a73.js"
   ]
 }
