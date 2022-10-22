@@ -8,7 +8,6 @@ import {
   CardTitle,
   CardSubtitle
 } from "reactstrap";
-import logo from "../images/MahdiHasanzadeh.jpg";
 // import { motion } from "framer-motion";
 export default function RenderHomePage(props) {
   //C () ?

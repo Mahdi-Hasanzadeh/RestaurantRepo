@@ -15,11 +15,12 @@ import {
   Label,
   FormFeedback
 } from "reactstrap";
+
 import { useDispatch } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { addComment } from "../ConfigureStore.js";
-import logo1 from "../images//MahdiHasanzadeh.jpg";
 import { motion } from "framer-motion";
+
 class CommentForm extends Component {
   constructor(props) {
     super(props);

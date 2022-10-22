@@ -6,10 +6,10 @@ import {
 
 import { database } from "./Firebaseconfiguration.js";
 
-import { collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 //()
 //C
-const url = "http://localhost:5000/";
+//const url = "http://localhost:5000/";
 
 const initialStateForDishes = {
   dishes: [],
@@ -208,35 +208,35 @@ export const getPromotions = createAsyncThunk(
   }
 );
 
-const Add = async value => {
-  try {
-    await fetch(`${url}comments`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify(value)
-    });
-  } catch (error) {
-    alert("something went wrong");
-  }
-};
+// const Add = async value => {
+//   try {
+//     await fetch(`${url}comments`, {
+//       method: "POST",
+//       headers: {
+//         "Content-type": "application/json"
+//       },
+//       body: JSON.stringify(value)
+//     });
+//   } catch (error) {
+//     alert("something went wrong");
+//   }
+// };
 
-const saveFeedback = async value => {
-  try {
-    const res = await fetch(`${url}feedback`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify(value)
-    });
-    const data = await res.json();
-    alert(JSON.stringify(data));
-  } catch (error) {
-    alert("something went wrong");
-  }
-};
+// const saveFeedback = async value => {
+//   try {
+//     const res = await fetch(`${url}feedback`, {
+//       method: "POST",
+//       headers: {
+//         "Content-type": "application/json"
+//       },
+//       body: JSON.stringify(value)
+//     });
+//     const data = await res.json();
+//     alert(JSON.stringify(data));
+//   } catch (error) {
+//     alert("something went wrong");
+//   }
+// };
 
 const dishesSlice = createSlice({
   name: "dishes",
@@ -274,16 +274,20 @@ const commentsSlice = createSlice({
   reducers: {
     addComment: (state, action) => {
       const newcomment = {
-        id: state.comments.comments.length,
+        // id: state.comments.comments.length,
         dishId: action.payload.dishId,
         rating: action.payload.rating,
         comment: action.payload.comment,
         author: action.payload.author,
         date: new Date().toLocaleDateString()
       };
-      Add(newcomment);
-
-      state.comments.comments.push(newcomment);
+      addDoc(collection(database, "comments"), newcomment)
+        .then(response => {
+          window.location.reload();
+        })
+        .catch(error => {
+          alert(error.message);
+        });
 
       //?
       //()
@@ -343,8 +347,16 @@ const feedbackSlice = createSlice({
   initialState: [],
   reducers: {
     postFeedback: (state, action) => {
-      console.log(action.payload);
-      saveFeedback(action.payload);
+      // console.log(action.payload);
+      //aveFeedback(action.payload);
+      addDoc(collection(database, "feedbacks"), action.payload)
+        .then(res => {
+          alert("Thanks For Your Feedback");
+          window.location.reload();
+        })
+        .catch(error => {
+          alert(error.message);
+        });
     }
   }
 });

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { postFeedback } from "../ConfigureStore.js";
 import { useDispatch } from "react-redux";
+
 export default function My(props) {
   const dispatch = useDispatch();
   return <Contact dispatch={dispatch} />;
@@ -70,24 +71,24 @@ class Contact extends Component {
         message: this.state.message
       };
       this.props.dispatch(postFeedback(feedback));
-      this.setState(prevData => {
-        return {
-          firstName: "",
-          lastName: "",
-          email: "",
-          telNumber: "",
-          agree: false,
-          contactType: "",
-          message: "",
-          touched: {
-            firstName: false,
-            lastName: false,
-            email: false,
-            telNumber: false,
-            message: false
-          }
-        };
-      });
+      // this.setState(prevData => {
+      //   return {
+      //     firstName: "",
+      //     lastName: "",
+      //     email: "",
+      //     telNumber: "",
+      //     agree: false,
+      //     contactType: "",
+      //     message: "",
+      //     touched: {
+      //       firstName: false,
+      //       lastName: false,
+      //       email: false,
+      //       telNumber: false,
+      //       message: false
+      //     }
+      //   };
+      // });
     }
   };
 
