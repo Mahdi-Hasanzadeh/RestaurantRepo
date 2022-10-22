@@ -26,8 +26,7 @@ export default class Footer extends Component {
             <div className="address row-container col-12 col-md-4">
               <h4>Our Address</h4>
               <p className="addresscenter">121,Clear Water Bay Road Kowioon </p>
-              <p>Clear Water Bay,</p>
-              <p>HONG KONG</p>
+              <p className="addresscenter">Clear Water Bay HONG KONG</p>
 
               <i className="fa fa-phone fa-lg">Phone:09029342619</i>
               <br />
