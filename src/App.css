@@ -36,8 +36,20 @@ body {
   justify-content: space-between;
   width: 380px;
   flex-shrink: 0;
-  margin-left: auto;
   margin-right: 10px;
+  gap: 8px;
+}
+@media screen and (min-width: 576px) {
+  .navItems {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 500px;
+    flex-shrink: 0;
+    margin-left: auto;
+    margin-right: 10px;
+    gap: 0px;
+  }
 }
 .tag {
   padding: 3px;

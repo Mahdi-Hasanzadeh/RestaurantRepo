@@ -4,14 +4,14 @@ import Loading from "./Loading.js";
 import { Card, CardBody, CardHeader, Media } from "reactstrap";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-//C () ?
+// ? C () ?
 
 function About(props) {
-  window.scrollTo(5, 5); //console.log("about", props.leaders);
+  window.scrollTo(5, 5); // ? console.log("about", props.leaders);
   const leaders =
     props.leaders.status === false
       ? props.leaders.error
-      : props.leaders.map(leader => {
+      : props.leaders.map((leader) => {
           return <RenderLeader key={leader.id} leader={leader} />;
         });
 

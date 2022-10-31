@@ -13,32 +13,32 @@ import {
   FormGroup,
   Input,
   Label,
-  Col
+  Col,
 } from "reactstrap";
 
 import {
   getAuth,
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 export default function Header(props) {
   const [state, setState] = React.useState({
     isOpen: false,
-    isModelOpen: false
+    isModelOpen: false,
   });
   const auth = getAuth();
 
   const [formData, setFormData] = React.useState({
     email: "",
-    password: ""
+    password: "",
   });
 
-  const handlechange = event => {
+  const handlechange = (event) => {
     const { name, value } = event.target;
-    setFormData(prevData => {
+    setFormData((prevData) => {
       return {
         ...prevData,
-        [name]: value
+        [name]: value,
       };
     });
   };
@@ -46,26 +46,26 @@ export default function Header(props) {
   const navigate = useNavigate();
 
   const handleToggle = () => {
-    setState(prevData => {
+    setState((prevData) => {
       return {
         ...prevData,
-        isOpen: !prevData.isOpen
+        isOpen: !prevData.isOpen,
       };
     });
   };
 
   const handleModelOpen = () => {
-    setState(prevData => {
+    setState((prevData) => {
       return {
         ...prevData,
-        isModelOpen: !prevData.isModelOpen
+        isModelOpen: !prevData.isModelOpen,
       };
     });
   };
 
-  const handleLogin = event => {
+  const handleLogin = (event) => {
     // alert(state.email);
-    if (formData.email.split("").filter(x => x === "@").length !== 1) {
+    if (formData.email.split("").filter((x) => x === "@").length !== 1) {
       alert("Enter Your Email in a correct format");
     } else if (formData.email.split("@")[1] !== "gmail.com") {
       alert("Enter {gmail.com} correctly");
@@ -73,22 +73,22 @@ export default function Header(props) {
       alert("Enter a strong password");
     } else if (event === "login") {
       signInWithEmailAndPassword(auth, formData.email, formData.password)
-        .then(response => {
+        .then((response) => {
           alert("Welcome Back");
           handleModelOpen();
           navigate("/");
         })
-        .catch(error => {
+        .catch((error) => {
           alert(error.message);
         });
     } else {
       createUserWithEmailAndPassword(auth, formData.email, formData.password)
-        .then(resp => {
+        .then((resp) => {
           alert("Your Account has been created successfully");
           handleModelOpen();
           navigate("/");
         })
-        .catch(error => {
+        .catch((error) => {
           alert(error.message);
         });
     }
@@ -105,9 +105,15 @@ export default function Header(props) {
           <h3 className="restaurantTitle">Restaurant con fusion</h3>
         </NavbarBrand>
         <Collapse navbar isOpen={state.isOpen}>
-          <Nav className="navItems" navbar>
+          <Nav className="navItems d-flex flex-column flex-sm-row" navbar>
             <NavItem>
               <Link className="link" to="/">
+                <i className="fa fa-ship" />
+                Starting Page
+              </Link>
+            </NavItem>
+            <NavItem>
+              <Link className="link" to="/home">
                 <i className="fa fa-home" />
                 Home
               </Link>
@@ -132,9 +138,7 @@ export default function Header(props) {
             </NavItem>
             <NavItem>
               <button onClick={handleModelOpen}>
-                <i className="link btn-sign-in fa fa-sign-in fa-lg">
-                  Account
-                </i>{" "}
+                <i className="link btn-sign-in fa fa-sign-in fa-lg">Account</i>{" "}
               </button>
             </NavItem>
           </Nav>

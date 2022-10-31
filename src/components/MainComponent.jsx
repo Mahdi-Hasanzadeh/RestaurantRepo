@@ -4,11 +4,11 @@ import "font-awesome/css/font-awesome.min.css";
 import Menu from "./MenuComponent.jsx";
 import DishDetail from "./DishdetailComponent.js";
 import Header from "./Header.js";
+import Index from "./Index.js";
 import Footer from "./Footer.js";
 import Home from "./Home.js";
 import Contact from "./Contact.js";
 import About from "./About.js";
-
 import "../App.css";
 import { Routes, Route, Outlet, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,33 +18,30 @@ import {
   getComments,
   getLeaders,
   getDishes,
-  getPromotions
+  getPromotions,
 } from "../ConfigureStore.js";
 
 //()
 function Main(props) {
   const location = useLocation();
   const dispatch = useDispatch();
-  const store = useSelector(store => store);
+  const store = useSelector((store) => store);
   const isLoading = store.comments.comments.isLoading;
   const isLoadingLeader = store.leaders.isLoading;
   const isLoadingDish = store.dishes.isLoading;
   const isLoadingPromotion = store.promotions.isLoading;
 
-  React.useEffect(
-    () => {
-      //  console.log("effect");
-      setTimeout(() => {
-        dispatch(getLeaders());
-        dispatch(getComments());
-        dispatch(getDishes());
-      }, 1500);
-      setTimeout(() => {
-        dispatch(getPromotions());
-      }, 2500);
-    },
-    [dispatch]
-  );
+  React.useEffect(() => {
+    //  console.log("effect");
+    setTimeout(() => {
+      dispatch(getLeaders());
+      dispatch(getComments());
+      dispatch(getDishes());
+    }, 1500);
+    setTimeout(() => {
+      dispatch(getPromotions());
+    }, 2500);
+  }, [dispatch]);
   function BasicLayout() {
     return (
       <React.Fragment>
@@ -58,12 +55,12 @@ function Main(props) {
   const featuredDish =
     store.dishes.dishes.status === false
       ? store.dishes.dishes
-      : store.dishes.dishes.filter(item => item.featured)[0];
+      : store.dishes.dishes.filter((item) => item.featured)[0];
 
   const featuredLeader =
     store.leaders.leaders.status === false
       ? store.leaders.leaders
-      : store.leaders.leaders.filter(item => item.featured === true)[0];
+      : store.leaders.leaders.filter((item) => item.featured === true)[0];
 
   const promotion =
     store.promotions.promotions.status === false
@@ -77,8 +74,10 @@ function Main(props) {
       <AnimatePresence>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<BasicLayout />}>
+            <Route index element={<Index />} />
             <Route
               index
+              path="home"
               element={
                 <Home
                   isLoadingDish={isLoadingDish}

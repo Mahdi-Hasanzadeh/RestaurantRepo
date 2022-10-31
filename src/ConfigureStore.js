@@ -1,34 +1,35 @@
+// * C () ?
+
 import {
   configureStore,
   createSlice,
-  createAsyncThunk
+  createAsyncThunk,
 } from "@reduxjs/toolkit";
-
 import { database } from "./Firebaseconfiguration.js";
 
 import { addDoc, collection, getDocs } from "firebase/firestore";
-//()
-//C
+// * ()
+//todo C
 //const url = "http://localhost:5000/";
 
 const initialStateForDishes = {
   dishes: [],
-  isLoading: true
+  isLoading: true,
 };
 
 const initialStateForComments = {
   comments: [],
-  isLoading: true
+  isLoading: true,
 };
 
 const initialStateForLeaders = {
   leaders: [],
-  isLoading: true
+  isLoading: true,
 };
 
 const initialStateForPromotions = {
   promotions: [],
-  isLoading: true
+  isLoading: true,
 };
 
 //
@@ -41,10 +42,10 @@ const fetchLeaders = async () => {
       const e = "error";
       throw e;
     } else {
-      const data = await response.docs.map(item => {
+      const data = await response.docs.map((item) => {
         return {
           id: item.id,
-          ...item.data()
+          ...item.data(),
         };
       });
 
@@ -56,29 +57,31 @@ const fetchLeaders = async () => {
     if (err === "error") {
       return {
         status: false,
-        error: "check Your Internet connection"
+        error: "check Your Internet connection",
       };
     } else {
       return {
         status: false,
-        error: err.message
+        error: err.message,
       };
     }
   }
 };
+
 const fetchDishes = async () => {
   const dbInstance = collection(database, "dishes");
 
   try {
     const response = await getDocs(dbInstance);
+
     if (response.size === 0) {
       const e = "error";
       throw e;
     } else {
-      const data = await response.docs.map(item => {
+      const data = await response.docs.map((item) => {
         return {
           id: item.id,
-          ...item.data()
+          ...item.data(),
         };
       });
       //console.log(data);
@@ -89,12 +92,12 @@ const fetchDishes = async () => {
     if (err === "error") {
       return {
         status: false,
-        error: "check Your Internet connection"
+        error: "check Your Internet connection",
       };
     } else {
       return {
         status: false,
-        error: err.message
+        error: err.message,
       };
     }
   }
@@ -108,10 +111,10 @@ const fetchcomments = async () => {
       const e = "error";
       throw e;
     } else {
-      const data = await response.docs.map(item => {
+      const data = await response.docs.map((item) => {
         return {
           id: item.id,
-          ...item.data()
+          ...item.data(),
         };
       });
 
@@ -122,12 +125,12 @@ const fetchcomments = async () => {
     if (err === "error") {
       return {
         status: false,
-        error: "check Your Internet connection"
+        error: "check Your Internet connection",
       };
     } else {
       return {
         status: false,
-        error: err.message
+        error: err.message,
       };
     }
   }
@@ -140,7 +143,7 @@ const fetchPromotions = async () => {
       const e = "error";
       throw e;
     } else {
-      const data = await response.docs.map(item => item.data());
+      const data = await response.docs.map((item) => item.data());
 
       //console.log(data);
       return data;
@@ -149,12 +152,12 @@ const fetchPromotions = async () => {
     if (err === "error") {
       return {
         status: false,
-        error: "check Your Internet connection"
+        error: "check Your Internet connection",
       };
     } else {
       return {
         status: false,
-        error: err.message
+        error: err.message,
       };
     }
   }
@@ -242,7 +245,7 @@ const dishesSlice = createSlice({
   name: "dishes",
   initialState: initialStateForDishes,
   extraReducers: {
-    [getDishes.pending]: state => {
+    [getDishes.pending]: (state) => {
       state.isLoading = true;
     },
     [getDishes.fulfilled]: (state, action) => {
@@ -262,10 +265,10 @@ const dishesSlice = createSlice({
       state.dishes = action.payload;
       // console.log("dishes", action.payload.map(item => item.data()));
     },
-    [getDishes.rejected]: state => {
+    [getDishes.rejected]: (state) => {
       state.isLoading = false;
-    }
-  }
+    },
+  },
 });
 
 const commentsSlice = createSlice({
@@ -279,40 +282,40 @@ const commentsSlice = createSlice({
         rating: action.payload.rating,
         comment: action.payload.comment,
         author: action.payload.author,
-        date: new Date().toLocaleDateString()
+        date: new Date().toLocaleDateString(),
       };
       addDoc(collection(database, "comments"), newcomment)
-        .then(response => {
+        .then((response) => {
           window.location.reload();
         })
-        .catch(error => {
+        .catch((error) => {
           alert(error.message);
         });
 
       //?
       //()
       //C
-    }
+    },
   },
   extraReducers: {
-    [getComments.pending]: state => {
+    [getComments.pending]: (state) => {
       state.comments.isLoading = true;
     },
     [getComments.fulfilled]: (state, action) => {
       state.comments.isLoading = false;
       state.comments.comments = action.payload;
     },
-    [getComments.rejected]: state => {
+    [getComments.rejected]: (state) => {
       state.comments.isLoading = false;
-    }
-  }
+    },
+  },
 });
 
 const leadersSlice = createSlice({
   name: "leader",
   initialState: initialStateForLeaders,
   extraReducers: {
-    [getLeaders.pending]: state => {
+    [getLeaders.pending]: (state) => {
       state.isLoading = true;
     },
     [getLeaders.fulfilled]: (state, action) => {
@@ -320,27 +323,27 @@ const leadersSlice = createSlice({
       state.leaders = action.payload;
       //console.log("leader", action.payload);
     },
-    [getLeaders.rejected]: state => {
+    [getLeaders.rejected]: (state) => {
       state.isLoading = false;
-    }
-  }
+    },
+  },
 });
 
 const promotionsSlice = createSlice({
   name: "promotions",
   initialState: initialStateForPromotions,
   extraReducers: {
-    [getPromotions.pending]: state => {
+    [getPromotions.pending]: (state) => {
       state.isLoading = true;
     },
     [getPromotions.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.promotions = action.payload;
     },
-    [getPromotions.rejected]: state => {
+    [getPromotions.rejected]: (state) => {
       state.isLoading = false;
-    }
-  }
+    },
+  },
 });
 const feedbackSlice = createSlice({
   name: "feedback",
@@ -350,15 +353,15 @@ const feedbackSlice = createSlice({
       // console.log(action.payload);
       //aveFeedback(action.payload);
       addDoc(collection(database, "feedbacks"), action.payload)
-        .then(res => {
+        .then((res) => {
           alert("Thanks For Your Feedback");
           window.location.reload();
         })
-        .catch(error => {
+        .catch((error) => {
           alert(error.message);
         });
-    }
-  }
+    },
+  },
 });
 
 export const { addComment } = commentsSlice.actions;
@@ -370,11 +373,11 @@ export const store = configureStore({
     comments: commentsSlice.reducer,
     promotions: promotionsSlice.reducer,
     leaders: leadersSlice.reducer,
-    feedback: feedbackSlice.reducer
-  }
+    feedback: feedbackSlice.reducer,
+  },
 });
-// (() => {
-//   addDoc(collection(database, "dishes"), {
+//  (() => {
+//  addDoc(collection(database, "dishes"), {
 //     name: "Uthappizza",
 //     image: "/assets/images/uthappizza.png",
 //     category: "mains",

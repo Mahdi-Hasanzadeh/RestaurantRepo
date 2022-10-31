@@ -1,0 +1,43 @@
+.video {
+  position: relative;
+  z-index: -1;
+  object-fit: cover;
+  object-position: center;
+}
+.contentnew {
+  position: absolute;
+  z-index: 1;
+  color: white;
+}
+.homeBtn {
+  margin: 0px 5px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+  padding: 5px;
+  background-color: transparent;
+  color: rgb(4, 255, 71);
+  box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.9);
+  transition: padding 1s;
+  text-align: center;
+}
+
+.homeBtn:hover {
+  padding: 15px;
+}
+@media screen and (min-width: 576px) {
+  .homeBtn {
+    margin: 0px 5px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1.5rem;
+    padding: 20px;
+    background-color: transparent;
+    color: rgb(4, 255, 71);
+    box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.9);
+    transition: padding 1s;
+  }
+  .homeBtn:hover {
+    padding: 25px;
+  }
+}

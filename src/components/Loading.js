@@ -3,7 +3,7 @@ import React from "react";
 export default function Loading() {
   const styles = {
     fontSize: "36px",
-    color: "blue"
+    color: "blue",
   };
   return (
     <div className="container">
