@@ -8,16 +8,14 @@ import { getFirestore } from "firebase/firestore";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAnFYseUaObucLHRcU3KjJM0GDkcD_yC8U",
-  authDomain: "restaurantfirebase-37b81.firebaseapp.com",
-  projectId: "restaurantfirebase-37b81",
-  storageBucket: "restaurantfirebase-37b81.appspot.com",
-  messagingSenderId: "481938463542",
-  appId: "1:481938463542:web:ace3ecf36eebf3dcdc3197",
-  measurementId: "G-ETJQHCN83F"
+  apiKey: "AIzaSyD4gj_R6eSZhRME2XvPIyy610ins6MYjq4",
+  authDomain: "restaurant-1db1b.firebaseapp.com",
+  projectId: "restaurant-1db1b",
+  storageBucket: "restaurant-1db1b.appspot.com",
+  messagingSenderId: "360587024758",
+  appId: "1:360587024758:web:50582663044ada12c3c257",
 };
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 export const database = getFirestore(app);
-//const analytics = getAnalytics(app);

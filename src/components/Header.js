@@ -137,7 +137,7 @@ export default function Header(props) {
               </Link>
             </NavItem>
             <NavItem>
-              <button onClick={handleModelOpen}>
+              <button className="rounded border-0 p-1" onClick={handleModelOpen}>
                 <i className="link btn-sign-in fa fa-sign-in fa-lg">Account</i>{" "}
               </button>
             </NavItem>

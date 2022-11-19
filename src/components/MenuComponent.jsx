@@ -1,6 +1,6 @@
 import React from "react";
 import Loading from "./Loading.js";
-import { Card, CardImg, CardImgOverlay, CardTitle } from "reactstrap";
+import { Card, CardBody, CardImg, CardImgOverlay, CardTitle } from "reactstrap";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 function Menu(props) {
@@ -13,20 +13,26 @@ function Menu(props) {
         {props.data.error}
       </div>
     ) : (
-      props.data.map(item => {
+      props.data.map((item) => {
         return (
-          <div key={item.id} className="col-12 col-md-5 ">
-            <Card>
+          <div key={item.id} className="col-12 col-md-5 mb-2">
+            <Card className="myCard">
               <CardImg
                 width="100%"
-                src={require(`../images/${item.image.split("/")[2]}`)}
+                src={require(`../images/${item.image.split("/")[1]}`)}
                 alt={item.name}
               />
               <CardImgOverlay>
                 <CardTitle>{item.name}</CardTitle>
               </CardImgOverlay>
             </Card>
-            <Link to={`/menu/${item.id}`}> More Info </Link>
+            <Link
+              className="btn btn-info rounded-5 mt-2 infoLink "
+              to={`/menu/${item.id}`}
+            >
+              {" "}
+              More Info...{" "}
+            </Link>
           </div>
         );
       })

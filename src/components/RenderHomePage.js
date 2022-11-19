@@ -6,7 +6,7 @@ import {
   CardImg,
   CardText,
   CardTitle,
-  CardSubtitle
+  CardSubtitle,
 } from "reactstrap";
 // import { motion } from "framer-motion";
 export default function RenderHomePage(props) {
@@ -20,17 +20,19 @@ export default function RenderHomePage(props) {
       );
     } else if (props.item.status === false) {
       return (
-        <Card>
+        <Card className="myCard">
           <CardTitle>
-            Fetching Failed<br />
+            Fetching Failed
+            <br />
             {props.item.error}
           </CardTitle>
         </Card>
       );
     } else {
-      const slice = props.item.image.split("/")[2];
+      const slice = props.item.image.split("/")[1];
+      console.log(slice);
       return (
-        <Card>
+        <Card className="myCard">
           <CardImg src={require(`../images/${slice}`)} alt={props.item.name} />
           <CardBody>
             <CardTitle className="cardTitle">{props.item.name}</CardTitle>
