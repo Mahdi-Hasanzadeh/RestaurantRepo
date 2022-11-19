@@ -5,7 +5,7 @@ export default class Footer extends Component {
     return (
       <React.Fragment>
         <div className="container footer">
-          <div className="row  ">
+          <div className="row ">
             <div className="links row-container col-12  col-md-4">
               <div className="soc">
                 <h4>Links</h4>

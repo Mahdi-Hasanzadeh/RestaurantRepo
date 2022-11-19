@@ -101,11 +101,14 @@ export default function Header(props) {
     <React.Fragment>
       <Navbar expand="md" className="container header">
         <NavbarToggler className="navtoggle" onClick={handleToggle} />
-        <NavbarBrand className="navbarBrand">
+        <NavbarBrand className="navbarBrand me-1 me-sm-0">
           <h3 className="restaurantTitle">Restaurant con fusion</h3>
         </NavbarBrand>
         <Collapse navbar isOpen={state.isOpen}>
-          <Nav className="navItems d-flex flex-column flex-sm-row" navbar>
+          <Nav
+            className="navItems d-flex flex-column flex-sm-row align-items-baseline gap-1 "
+            navbar
+          >
             <NavItem>
               <Link className="link" to="/">
                 <i className="fa fa-ship" />
@@ -137,7 +140,10 @@ export default function Header(props) {
               </Link>
             </NavItem>
             <NavItem>
-              <button className="rounded border-0 p-1" onClick={handleModelOpen}>
+              <button
+                className="rounded border-0 p-1"
+                onClick={handleModelOpen}
+              >
                 <i className="link btn-sign-in fa fa-sign-in fa-lg">Account</i>{" "}
               </button>
             </NavItem>
@@ -146,7 +152,7 @@ export default function Header(props) {
       </Navbar>
       <div className="container">
         <div className="row header">
-          <div className="col-12 col-md-6">
+          <div className="col-12 col-md-6 restaurant">
             <h3>Restaurant con fusion</h3>
             <p>
               We take inspiration from the Worlds's best cuisines and create a

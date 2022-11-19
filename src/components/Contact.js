@@ -25,22 +25,22 @@ class Contact extends Component {
         lastName: false,
         email: false,
         telNumber: false,
-        message: false
-      }
+        message: false,
+      },
     };
   }
 
-  handleFormData = event => {
+  handleFormData = (event) => {
     const { type, name, value, checked } = event.target;
-    this.setState(prevData => {
+    this.setState((prevData) => {
       return {
         ...prevData,
-        [name]: type === "checkbox" ? checked : value
+        [name]: type === "checkbox" ? checked : value,
       };
     });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     //alert("submit");
 
     //this.validate;
@@ -60,6 +60,15 @@ class Contact extends Component {
       errors.isMessage === false
     ) {
       event.preventDefault();
+    } else if (
+      this.state.firstName.length === 0 ||
+      this.state.lastName.length === 0 ||
+      this.state.email.length === 0 ||
+      this.state.telNumber.length === 0 ||
+      this.state.message.length === 0
+    ) {
+      alert("Fill out the form correctly");
+      event.preventDefault();
     } else {
       const feedback = {
         firstName: this.state.firstName,
@@ -68,7 +77,7 @@ class Contact extends Component {
         telNumber: this.state.telNumber,
         agree: this.state.agree,
         contactType: this.state.contactType,
-        message: this.state.message
+        message: this.state.message,
       };
       this.props.dispatch(postFeedback(feedback));
       // this.setState(prevData => {
@@ -92,12 +101,12 @@ class Contact extends Component {
     }
   };
 
-  handleOnBlur = event => {
+  handleOnBlur = (event) => {
     const { name } = event.target;
-    this.setState(prevData => {
+    this.setState((prevData) => {
       return {
         ...prevData,
-        touched: { ...this.state.touched, [name]: true }
+        touched: { ...this.state.touched, [name]: true },
       };
     });
   };
@@ -112,7 +121,7 @@ class Contact extends Component {
       isLastName: false,
       isEmail: false,
       isTelNumber: false,
-      isMessage: false
+      isMessage: false,
     };
 
     if (this.state.touched.firstName && firstName.length <= 3) {
@@ -140,7 +149,7 @@ class Contact extends Component {
 
     if (
       this.state.touched.email &&
-      email.split("").filter(x => x === "@").length !== 1
+      email.split("").filter((x) => x === "@").length !== 1
     ) {
       errors.email = "Email Should Contain ( @ )";
     } else if (this.state.touched.email && email.split("@")[0].length < 6) {
@@ -190,9 +199,11 @@ class Contact extends Component {
               121,Clear Water Bay Road <br />
               Clear Water Bay,Kowloon <br />
               HONG KONG <br />
-              <i className="fa fa-phone" />09029342619
+              <i className="fa fa-phone" />
+              09029342619
               <br />
-              <i className="fa fa-fax" />09029342619
+              <i className="fa fa-fax" />
+              09029342619
               <br />
               <i className="fa fa-address-book ">
                 {" "}

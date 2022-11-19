@@ -30,6 +30,15 @@ body {
 }
 .navbarBrand {
   margin-right: auto;
+  animation: brand 1.2s backwards;
+}
+@keyframes brand {
+  from {
+    transform: translateX(-1000px);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 .navItems {
   display: flex;
@@ -48,18 +57,6 @@ body {
     transform: translateX(0);
   }
 }
-@media screen and (min-width: 576px) {
-  .navItems {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 500px;
-    margin-left: auto;
-    margin-right: 10px;
-    gap: 0px;
-    flex-wrap: wrap;
-  }
-}
 .tag {
   padding: 3px;
   margin-left: 5px;
@@ -76,10 +73,18 @@ body {
 .link {
   color: #000000;
   text-decoration: none;
+  transition: all 0.15s ease-in-out;
 }
 .link:hover {
-  padding: 5px;
   color: #184da8;
+  transform: translateX(3px) !important;
+}
+.nav-item {
+  transition: all 0.15s ease-in-out !important;
+}
+.nav-item:hover {
+  color: #184da8 !important;
+  transform: translateX(4px) !important;
 }
 .links {
   display: flex;
@@ -88,6 +93,7 @@ body {
 .row-container {
   background: #00f7ff;
   padding: 15px;
+  border-radius: 7px;
 }
 .comment {
   text-align: center;
@@ -140,9 +146,10 @@ body {
 .socialLink {
   text-decoration: none;
   color: #000000;
+  transition: all 0.15s ease-in-out;
 }
 .socialLink:hover {
-  padding: 5px;
+  transform: translateY(-5px);
   color: #184da8;
 }
 .cardTitle {
@@ -202,7 +209,7 @@ body {
 }
 
 .myCard {
-  animation: card 1.5s;
+  animation: card 2s normal;
   transition: all 0.5s;
 }
 .myCard:hover {
@@ -210,15 +217,57 @@ body {
 }
 @keyframes card {
   from {
-    -webkit-clip-path: polygon(50% 0, 0% 100%, 67% 39%, 0 29%);
-    clip-path: polygon(50% 0, 0% 100%, 67% 39%, 0 29%);
+    clip-path: polygon(0% 0, 25% 100%, 67% 10%, 10% 29%);
   }
   to {
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
 }
 .infoLink {
   cursor: pointer !important;
   font-family: cursive;
+  transition: all 0.4s ease-in-out;
+}
+.infoLink:hover {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.restaurant {
+  animation: restaurant 2.2s normal;
+}
+
+@keyframes restaurant {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .navItems {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 500px;
+    margin-left: auto;
+    margin-right: 10px;
+    gap: 0px;
+    flex-wrap: wrap;
+  }
+  .nav-item {
+    transition: all 0.15s ease-in-out !important;
+  }
+  .nav-item:hover {
+    color: #184da8 !important;
+    transform: translateY(-4px) !important;
+  }
+  .link:hover {
+    color: #184da8;
+    transform: translateY(-3px) !important;
+  }
 }

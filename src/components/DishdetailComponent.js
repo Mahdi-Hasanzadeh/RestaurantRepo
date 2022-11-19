@@ -115,16 +115,25 @@ class CommentForm extends Component {
     ) {
       event.preventDefault();
       return;
+    } else if (
+      this.state.author.length === 0 ||
+      this.state.comment.length === 0
+    ) {
+      alert("Fill out the form");
+      event.preventDefault();
+      return;
+    } else {
+      this.props.dispatch(
+        addComment({
+          dishId: this.props.dishId,
+          author: this.state.author,
+          comment: this.state.comment,
+          rating: this.state.rating,
+        })
+      );
+      this.handleToggle();
     }
-    this.props.dispatch(
-      addComment({
-        dishId: this.props.dishId,
-        author: this.state.author,
-        comment: this.state.comment,
-        rating: this.state.rating,
-      })
-    );
-    this.handleToggle();
+
     // if (
     //   formData.name.length === 0 ||
     //   formData.comment.length === 0 ||
