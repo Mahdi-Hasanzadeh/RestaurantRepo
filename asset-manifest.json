@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/RestaurantRepo/static/css/main.a20ddea9.css",
-    "main.js": "/RestaurantRepo/static/js/main.1b1ac1ed.js",
+    "main.css": "/RestaurantRepo/static/css/main.7a0582b6.css",
+    "main.js": "/RestaurantRepo/static/js/main.a950234b.js",
     "static/js/787.142da1d4.chunk.js": "/RestaurantRepo/static/js/787.142da1d4.chunk.js",
     "static/media/04 - Tajdar-e-Haram - S08E01.mp3": "/RestaurantRepo/static/media/04 - Tajdar-e-Haram - S08E01.4f64d73eb8511ac2ebde.mp3",
     "static/media/video-1.mp4": "/RestaurantRepo/static/media/video-1.59e75226d30ad48f9ede.mp4",
@@ -19,12 +19,12 @@
     "static/media/elaicheesecake.png": "/RestaurantRepo/static/media/elaicheesecake.79bcea396a9726301c23.png",
     "static/media/MahdiHasanzadeh.jpg": "/RestaurantRepo/static/media/MahdiHasanzadeh.e68897a0031aaf86b6bb.jpg",
     "index.html": "/RestaurantRepo/index.html",
-    "main.a20ddea9.css.map": "/RestaurantRepo/static/css/main.a20ddea9.css.map",
-    "main.1b1ac1ed.js.map": "/RestaurantRepo/static/js/main.1b1ac1ed.js.map",
+    "main.7a0582b6.css.map": "/RestaurantRepo/static/css/main.7a0582b6.css.map",
+    "main.a950234b.js.map": "/RestaurantRepo/static/js/main.a950234b.js.map",
     "787.142da1d4.chunk.js.map": "/RestaurantRepo/static/js/787.142da1d4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a20ddea9.css",
-    "static/js/main.1b1ac1ed.js"
+    "static/css/main.7a0582b6.css",
+    "static/js/main.a950234b.js"
   ]
 }
