@@ -106,33 +106,34 @@ const fetchcomments = async () => {
   const dbInstance = collection(database, "comments");
   try {
     const response = await getDocs(dbInstance);
-    // console.log(response.docs.length);
-    if (response.size === 0) {
-      const e = "error";
-      throw e;
-    } else {
-      const data = await response.docs.map((item) => {
-        return {
-          id: item.id,
-          ...item.data(),
-        };
-      });
+    // console.log(response.docChanges());
+    // if (response.empty) {
+    //   const e = "empty";
+    //   throw e;
+    // } else {
+    const data = await response.docs.map((item) => {
+      return {
+        id: item.id,
+        ...item.data(),
+      };
+    });
 
-      //console.log(data);
-      return data;
-    }
+    //console.log(data);
+    return data;
+    // }
   } catch (err) {
-    if (err === "error") {
-      return {
-        status: false,
-        error: "check Your Internet connection",
-      };
-    } else {
-      return {
-        status: false,
-        error: err.message,
-      };
-    }
+    console.log(err, "mahdi");
+    // if (err === "empty") {
+    //   return {
+    //     status: false,
+    //     error: "empty",
+    //   };
+    // } else {
+    return {
+      status: false,
+      error: err.message,
+      //};
+    };
   }
 };
 const fetchPromotions = async () => {

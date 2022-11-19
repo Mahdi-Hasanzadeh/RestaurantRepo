@@ -13,13 +13,14 @@ import {
   Col,
   Input,
   Label,
-  FormFeedback
+  FormFeedback,
 } from "reactstrap";
 
 import { useDispatch } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { addComment } from "../ConfigureStore.js";
 import { motion } from "framer-motion";
+import { type } from "@testing-library/user-event/dist/type/index.js";
 
 class CommentForm extends Component {
   constructor(props) {
@@ -32,25 +33,25 @@ class CommentForm extends Component {
       touched: {
         author: false,
         rating: false,
-        comment: false
-      }
+        comment: false,
+      },
     };
   }
   handleToggle = () => {
-    this.setState(prevData => {
+    this.setState((prevData) => {
       return {
-        isOpen: !prevData.isOpen
+        isOpen: !prevData.isOpen,
       };
     });
   };
   //()
 
-  handlechange = event => {
+  handlechange = (event) => {
     const { name, value } = event.target;
-    this.setState(prevData => {
+    this.setState((prevData) => {
       return {
         ...prevData,
-        [name]: value
+        [name]: value,
       };
     });
   };
@@ -62,7 +63,7 @@ class CommentForm extends Component {
       comment: "",
       isRating: false,
       isAuthor: false,
-      iscomment: false
+      iscomment: false,
     };
     if (this.state.touched.rating && rating === "") {
       errors.rating = "Required, rate our food please";
@@ -87,20 +88,20 @@ class CommentForm extends Component {
     return errors;
   };
 
-  handleBlur = event => {
+  handleBlur = (event) => {
     const { name } = event.target;
-    this.setState(prevData => {
+    this.setState((prevData) => {
       return {
         ...prevData,
         touched: {
           ...prevData.touched,
-          [name]: true
-        }
+          [name]: true,
+        },
       };
     });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     const errors = this.validation(
       this.state.rating,
       this.state.author,
@@ -120,7 +121,7 @@ class CommentForm extends Component {
         dishId: this.props.dishId,
         author: this.state.author,
         comment: this.state.comment,
-        rating: this.state.rating
+        rating: this.state.rating,
       })
     );
     this.handleToggle();
@@ -141,6 +142,8 @@ class CommentForm extends Component {
 
   render() {
     window.moveTo(0, 0);
+    let d = new Date();
+
     const errors = this.validation(
       this.state.rating,
       this.state.author,
@@ -252,13 +255,13 @@ function DishDetail(props) {
   const dish =
     props.data.status === false
       ? props.data
-      : props.data.filter(item => item.id === productId)[0];
+      : props.data.filter((item) => item.id === productId)[0];
   const comments =
     props.comments.status === false
       ? props.comments
       : props.comments
-          .filter(item => item.dishId === productId)
-          .filter(item => item.rating >= 2);
+          .filter((item) => item.dishId === productId)
+          .filter((item) => item.rating >= 2);
   function renderDish() {
     window.scrollTo(10, 10);
     return dish.status === false ? (
@@ -287,6 +290,61 @@ function DishDetail(props) {
     );
   }
 
+  function month(month) {
+    let m = "";
+    switch (month) {
+      case "1": {
+        m = "Jan.";
+        break;
+      }
+      case "2": {
+        m = "Feb.";
+        break;
+      }
+      case "3": {
+        m = "March";
+        break;
+      }
+      case "4": {
+        m = "April";
+        break;
+      }
+      case "5": {
+        m = "May";
+        break;
+      }
+      case "6": {
+        m = "June";
+        break;
+      }
+      case "7": {
+        m = "July";
+        break;
+      }
+      case "8": {
+        m = "Aug.";
+        break;
+      }
+      case "9": {
+        m = "Sept.";
+        break;
+      }
+      case "10": {
+        m = "Oct.";
+        break;
+      }
+      case "11": {
+        m = "Nov.";
+        break;
+      }
+      case "12": {
+        m = "Dec.";
+        break;
+      }
+    }
+    return m;
+  }
+
   function renderComment() {
     return comments.status === false ? (
       <div className="col-12 col-md-5">
@@ -300,18 +358,23 @@ function DishDetail(props) {
             <h4>Comments</h4>
             <hr />
           </CardTitle>
-          {comments.map(comment => {
+          {comments.map((comment) => {
+            let d = comment.date;
+            let mo = month(d.split("/")[0]);
+            let day = d.split("/")[1];
+            let year = d.split("/")[2];
             return (
               <div key={comment.id}>
                 <h3>{comment.comment}</h3>
                 <div className="info">
                   <h5 className="author">{comment.author}</h5>
                   <h5>
-                    {new Intl.DateTimeFormat("en-US", {
+                    {/* {new Intl.DateTimeFormat("en", {
                       year: "numeric",
                       month: "short",
-                      day: "2-digit"
-                    }).format(new Date(Date.parse(comment.date)))}
+                      day: "2-digit",
+                    }).format(new Date(Date.parse(comment.date)))} */}
+                    {mo} {day},{year}
                   </h5>
                 </div>
                 <hr />
