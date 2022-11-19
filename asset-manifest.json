@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/RestaurantRepo/static/css/main.7a0582b6.css",
-    "main.js": "/RestaurantRepo/static/js/main.a950234b.js",
+    "main.js": "/RestaurantRepo/static/js/main.72835630.js",
     "static/js/787.142da1d4.chunk.js": "/RestaurantRepo/static/js/787.142da1d4.chunk.js",
     "static/media/04 - Tajdar-e-Haram - S08E01.mp3": "/RestaurantRepo/static/media/04 - Tajdar-e-Haram - S08E01.4f64d73eb8511ac2ebde.mp3",
     "static/media/video-1.mp4": "/RestaurantRepo/static/media/video-1.59e75226d30ad48f9ede.mp4",
@@ -20,11 +20,11 @@
     "static/media/MahdiHasanzadeh.jpg": "/RestaurantRepo/static/media/MahdiHasanzadeh.e68897a0031aaf86b6bb.jpg",
     "index.html": "/RestaurantRepo/index.html",
     "main.7a0582b6.css.map": "/RestaurantRepo/static/css/main.7a0582b6.css.map",
-    "main.a950234b.js.map": "/RestaurantRepo/static/js/main.a950234b.js.map",
+    "main.72835630.js.map": "/RestaurantRepo/static/js/main.72835630.js.map",
     "787.142da1d4.chunk.js.map": "/RestaurantRepo/static/js/787.142da1d4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7a0582b6.css",
-    "static/js/main.a950234b.js"
+    "static/js/main.72835630.js"
   ]
 }
