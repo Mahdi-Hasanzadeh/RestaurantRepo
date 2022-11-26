@@ -18,9 +18,8 @@ body {
   padding-bottom: 330px;
 }
 .header {
-  background: #18adad;
+  background: #a0d2eb;
   border-radius: 10px;
-  margin-top: 5px;
   flex-wrap: wrap !important;
 }
 .restaurantTitle {
@@ -60,7 +59,8 @@ body {
 .tag {
   padding: 3px;
   margin-left: 5px;
-  background: #2dc4b7;
+  margin-top: 2px;
+  background: #9ee7e1;
   width: 100px;
   height: 30px;
   border-radius: 10px;
@@ -91,7 +91,6 @@ body {
   flex-direction: column;
 }
 .row-container {
-  background: #00f7ff;
   padding: 15px;
   border-radius: 7px;
 }
@@ -138,6 +137,8 @@ body {
 }
 .footer {
   margin-top: 10px;
+  background: #a0d2eb;
+  border-radius: 5px;
 }
 .addresscenter {
   text-align: center;

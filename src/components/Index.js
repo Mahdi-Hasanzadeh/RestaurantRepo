@@ -29,7 +29,7 @@ export default function Home() {
       animate={{ width: "100%" }}
       exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
     >
-      <div className="container ">
+      {/* <div className="container ">
         <div className="row">
           <div className="col-12 bg-secondary rounded-3 d-flex justify-content-center align-items-center gap-3 text-white pt-2 pb-2 mt-1 mb-1">
             {isplaying ? "Song is Playing" : "Song is Paused"}
@@ -42,7 +42,7 @@ export default function Home() {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="container">
         <div className="row">

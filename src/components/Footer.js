@@ -4,7 +4,7 @@ export default class Footer extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="container footer">
+        <div className="container-fluid footer rounded-5">
           <div className="row ">
             <div className="links row-container col-12  col-md-4">
               <div className="soc">

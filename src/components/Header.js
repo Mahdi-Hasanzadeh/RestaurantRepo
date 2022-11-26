@@ -99,7 +99,7 @@ export default function Header(props) {
   };
   return (
     <React.Fragment>
-      <Navbar expand="md" className="container header">
+      <Navbar expand="md" className="container-fluid p-3 header mt-3">
         <NavbarToggler className="navtoggle" onClick={handleToggle} />
         <NavbarBrand className="navbarBrand me-1 me-sm-0">
           <h3 className="restaurantTitle">Restaurant con fusion</h3>
@@ -150,8 +150,8 @@ export default function Header(props) {
           </Nav>
         </Collapse>
       </Navbar>
-      <div className="container">
-        <div className="row header">
+      <div className="container-fluid">
+        <div className="row header mb-1 p-3 ">
           <div className="col-12 col-md-6 restaurant">
             <h3>Restaurant con fusion</h3>
             <p>
