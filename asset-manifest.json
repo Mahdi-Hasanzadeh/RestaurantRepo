@@ -1,17 +1,21 @@
 {
   "files": {
-    "main.css": "/RestaurantRepo/static/css/main.ab1dfeba.css",
-    "main.js": "/RestaurantRepo/static/js/main.78af0f74.js",
+    "main.css": "/RestaurantRepo/static/css/main.8136f322.css",
+    "main.js": "/RestaurantRepo/static/js/main.b6359ed0.js",
     "static/js/787.142da1d4.chunk.js": "/RestaurantRepo/static/js/787.142da1d4.chunk.js",
     "static/media/04 - Tajdar-e-Haram - S08E01.mp3": "/RestaurantRepo/static/media/04 - Tajdar-e-Haram - S08E01.4f64d73eb8511ac2ebde.mp3",
     "static/media/video-1.mp4": "/RestaurantRepo/static/media/video-1.59e75226d30ad48f9ede.mp4",
     "static/media/river.jpg": "/RestaurantRepo/static/media/river.d2d14664b8c273c7b325.jpg",
+    "static/media/uthappizza.png": "/RestaurantRepo/static/media/uthappizza.624f11fe0be809f50235.png",
+    "static/media/burger.jpg": "/RestaurantRepo/static/media/burger.40ba9669c6d0379bde90.jpg",
+    "static/media/pasta.jpg": "/RestaurantRepo/static/media/pasta.12d7eb7204611f8bbefb.jpg",
     "static/media/fontawesome-webfont.svg?v=4.7.0": "/RestaurantRepo/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
+    "static/media/stake.jpg": "/RestaurantRepo/static/media/stake.20c6f24f887fedb1efd2.jpg",
     "static/media/fontawesome-webfont.eot": "/RestaurantRepo/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
     "static/media/fontawesome-webfont.ttf?v=4.7.0": "/RestaurantRepo/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
     "static/media/fontawesome-webfont.woff?v=4.7.0": "/RestaurantRepo/static/media/fontawesome-webfont.f691f37e57f04c152e23.woff",
     "static/media/fontawesome-webfont.woff2?v=4.7.0": "/RestaurantRepo/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
-    "static/media/uthappizza.png": "/RestaurantRepo/static/media/uthappizza.e3b6414e4292e7f7802a.png",
+    "static/media/2.png": "/RestaurantRepo/static/media/2.e3b6414e4292e7f7802a.png",
     "static/media/buffet.png": "/RestaurantRepo/static/media/buffet.fe37515a0191a7ef956e.png",
     "static/media/zucchipakoda.png": "/RestaurantRepo/static/media/zucchipakoda.57b1a046e46917644a54.png",
     "static/media/vadonut.png": "/RestaurantRepo/static/media/vadonut.c5cd81441d6a6fb7bda6.png",
@@ -20,12 +24,12 @@
     "static/media/elaicheesecake.png": "/RestaurantRepo/static/media/elaicheesecake.79bcea396a9726301c23.png",
     "static/media/MahdiHasanzadeh.jpg": "/RestaurantRepo/static/media/MahdiHasanzadeh.e68897a0031aaf86b6bb.jpg",
     "index.html": "/RestaurantRepo/index.html",
-    "main.ab1dfeba.css.map": "/RestaurantRepo/static/css/main.ab1dfeba.css.map",
-    "main.78af0f74.js.map": "/RestaurantRepo/static/js/main.78af0f74.js.map",
+    "main.8136f322.css.map": "/RestaurantRepo/static/css/main.8136f322.css.map",
+    "main.b6359ed0.js.map": "/RestaurantRepo/static/js/main.b6359ed0.js.map",
     "787.142da1d4.chunk.js.map": "/RestaurantRepo/static/js/787.142da1d4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ab1dfeba.css",
-    "static/js/main.78af0f74.js"
+    "static/css/main.8136f322.css",
+    "static/js/main.b6359ed0.js"
   ]
 }
