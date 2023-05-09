@@ -29,8 +29,9 @@ export default function RenderHomePage(props) {
         </Card>
       );
     } else {
-      const slice = props.item.image.split("/")[1];
+      const slice = props.item.image.split("/")[3];
       console.log(slice);
+      console.log("here...", props.item.image);
       return (
         <Card className="myCard mb-2">
           <CardImg src={require(`../images/${slice}`)} alt={props.item.name} />

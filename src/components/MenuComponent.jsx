@@ -18,8 +18,7 @@ function Menu(props) {
           <div key={item.id} className="col-12 col-md-5 mb-2">
             <Card className="myCard">
               <CardImg
-                width="100%"
-                src={require(`../images/${item.image.split("/")[1]}`)}
+                src={require(`../images/${item.image.split("/")[3]}`)}
                 alt={item.name}
               />
               <CardImgOverlay>

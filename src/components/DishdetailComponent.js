@@ -287,7 +287,7 @@ function DishDetail(props) {
         <Card>
           <CardImg
             width="100%"
-            src={require(`../images/${dish.image.split("/")[1]}`)}
+            src={require(`../images/${dish.image.split("/")[3]}`)}
             alt={dish.name}
           />
           <CardBody>
